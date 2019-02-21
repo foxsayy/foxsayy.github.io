@@ -165,17 +165,30 @@ var themeMenus = {};
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2019/02/21/nltk/">[FC] NLTK test post</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-meta">
       
 	Posted on <a href="/2019/02/21/nltk/" class="article-date">
-	  <time datetime="2019-02-21T13:50:43.032Z" itemprop="datePublished">February 21, 2019</time>
+	  <time datetime="2019-02-21T13:53:33.000Z" itemprop="datePublished">February 21, 2019</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>패스트캠퍼스 데이터사이언스스쿨의 김도형 박사님 수업을 듣고 강의자료를 연습한 파일입니다. 개인적으로 참고하기 위한 요약노트이니 자세한 내용을 원하시는 분은 <a href="https://datascienceschool.net" target="_blank" rel="noopener">https://datascienceschool.net</a> 에 올라와 있는 강의자료를 참고하시기 바랍니다.</p>
+        <hr>
+<p>패스트캠퍼스 데이터사이언스스쿨의 김도형 박사님 수업을 듣고 강의자료를 요약한 글입니다. 개인적으로 참고하기 위한 요약노트이니 보다 자세한 내용을 원하시는 분은 <a href="https://datascienceschool.net" target="_blank" rel="noopener">https://datascienceschool.net</a> 에 올라와 있는 강의자료를 참고하시기 바랍니다.</p>
+<hr>
+<p>패스트캠퍼스 데이터사이언스스쿨의 김도형 박사님 수업을 듣고 강의자료를 연습한 파일입니다. 개인적으로 참고하기 위한 요약노트이니 자세한 내용을 원하시는 분은 <a href="https://datascienceschool.net" target="_blank" rel="noopener">https://datascienceschool.net</a> 에 올라와 있는 강의자료를 참고하시기 바랍니다.</p>
 <h1 id="NLTK-자연어-처리-패키지"><a href="#NLTK-자연어-처리-패키지" class="headerlink" title="NLTK 자연어 처리 패키지"></a>NLTK 자연어 처리 패키지</h1><ul>
 <li>NLTK(Natural Language Toolkit) 패키지</li>
 <li>교육용으로 개발된 자연어 처리 및 문서 분석용 파이썬 패키지</li>
@@ -287,13 +300,13 @@ but particularly of Emma.
 <li><p>품사 부착(Part-Of-Speech tagging)</p>
 <h3 id="어간-추출과-원형-복원"><a href="#어간-추출과-원형-복원" class="headerlink" title="어간 추출과 원형 복원"></a>어간 추출과 원형 복원</h3></li>
 </ul>
-<p>어간 추출(stemming)은 변화된 단어의 접미사나 어미를 제거하여 같은 의미를 가지는 형태소의 기본형을 찾는 방법이다. NLTK는 <code>PorterStemmer</code>  <code>LancasterStemmer</code> 등을 제공한다. 어간 추출법은 단순히 어미를 제거할 뿐이므로 단어의 원형의 정확히 찾아주지는 않는다. </p>
+<p>어간 추출(stemming)은 변화된 단어의 접미사나 어미를 제거하여 같은 의미를 가지는 형태소의 기본형을 찾는 방법이다. NLTK는 <code>PorterStemmer</code>  <code>LancasterStemmer</code> 등을 제공한다. 어간 추출법은 단순히 어미를 제거할 뿐이므로 단어의 원형의 정확히 찾아주지는 않는다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">words = [<span class="string">'lives'</span>, <span class="string">'crying'</span>, <span class="string">'flies'</span>, <span class="string">'dying'</span>]</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> PorterStemmer</span><br><span class="line">st = PorterStemmer()</span><br><span class="line">[st.stem(w) <span class="keyword">for</span> w <span class="keyword">in</span> words]</span><br></pre></td></tr></table></figure>
 <pre><code>[&apos;live&apos;, &apos;cri&apos;, &apos;fli&apos;, &apos;die&apos;]
 </code></pre><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> LancasterStemmer</span><br><span class="line">st = LancasterStemmer()</span><br><span class="line">[st.stem(w) <span class="keyword">for</span> w <span class="keyword">in</span> words]</span><br></pre></td></tr></table></figure>
 <pre><code>[&apos;liv&apos;, &apos;cry&apos;, &apos;fli&apos;, &apos;dying&apos;]
-</code></pre><p>원형 복원(lemmatizing)은 같은 의미를 가지는 여러 단어를 사전형으로 통일하는 작업이다. 품사(part of speech)를 지정하는 경우 좀 더 정확한 원형을 찾을 수 있다. 예를 들어 </p>
+</code></pre><p>원형 복원(lemmatizing)은 같은 의미를 가지는 여러 단어를 사전형으로 통일하는 작업이다. 품사(part of speech)를 지정하는 경우 좀 더 정확한 원형을 찾을 수 있다. 예를 들어</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> WordNetLemmatizer</span><br><span class="line">lm = WordNetLemmatizer()</span><br><span class="line">[lm.lemmatize(w) <span class="keyword">for</span> w <span class="keyword">in</span> words]</span><br></pre></td></tr></table></figure>
 <pre><code>[&apos;life&apos;, &apos;cry&apos;, &apos;fly&apos;, &apos;dying&apos;]
 </code></pre><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">lm.lemmatize(<span class="string">"dying"</span>, pos=<span class="string">"v"</span>)</span><br></pre></td></tr></table></figure>
@@ -364,11 +377,11 @@ but particularly of Emma.
 <p><code>concordance</code> 메서드로 단어가 사용된 위치를 직접 표시할 수도 있다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">text.concordance(<span class="string">'Emma'</span>, lines=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>Displaying 5 of 25 matches:
- Emma by Jane Austen 1816 VOLUME I CHAPTER 
+ Emma by Jane Austen 1816 VOLUME I CHAPTER
  Emma Woodhouse handsome clever and rich wi
 of both daughters but particularly of Emma Between _them_ it was more the intima
 and friend very mutually attached and Emma doing just what she liked highly este
-y by her own The real evils indeed of Emma s situation were the power of having 
+y by her own The real evils indeed of Emma s situation were the power of having
 </code></pre><p><code>similar</code> 메서드는 해당 단어와 비슷한 문맥에서 사용된 단어들을 찾는다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">text.similar(<span class="string">'Emma'</span>, <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>she it he i harriet you her jane him that
@@ -399,7 +412,13 @@ Jane Fairfax; Miss Fairfax; every thing; young man; every body
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/datascienceschool/">datascienceschool</a>
+
       
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dr-Kim/">Dr.Kim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/datascienceschool/">datascienceschool</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastcampus/">fastcampus</a></li></ul>
+
       
             
       
@@ -1204,7 +1223,7 @@ Jane Fairfax; Miss Fairfax; every thing; young man; every body
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/02/21/nltk/">(no title)</a></h6>
+              <h6 style="margin: 0;"><a href="/2019/02/21/nltk/">[FC] NLTK test post</a></h6>
               <span>February 21, 2019</span>
             </div>
 
@@ -1279,7 +1298,7 @@ Jane Fairfax; Miss Fairfax; every thing; young man; every body
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DSBooks/">DSBooks</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NoSQL/">NoSQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/crawling/">crawling</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/datascienceschool/">datascienceschool</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DSBooks/">DSBooks</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NoSQL/">NoSQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/crawling/">crawling</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/datascienceschool/">datascienceschool</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1289,7 +1308,7 @@ Jane Fairfax; Miss Fairfax; every thing; young man; every body
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-with-Python/">Deep Learning with Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dr-Kim/">Dr.Kim</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL/">NoSQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawling/">crawling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datascienceschool/">datascienceschool</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastcampus/">fastcampus</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/비숍/">비숍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-with-Python/">Deep Learning with Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dr-Kim/">Dr.Kim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL/">NoSQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawling/">crawling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datascienceschool/">datascienceschool</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastcampus/">fastcampus</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/비숍/">비숍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
