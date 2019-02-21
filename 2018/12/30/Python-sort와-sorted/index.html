@@ -13,7 +13,7 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>[python] 딕셔너리 key와 value 뒤집기 | THE DATASCIENTIST</title>
+  <title>[python] sort와 sorted | THE DATASCIENTIST</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="python">
@@ -21,18 +21,18 @@
   
   
   
-  <meta name="description" content="딕셔너리 key와 value 바꾸기morse = &amp;#123;    &apos;A&apos; : &apos;.-&apos;,    &apos;B&apos; : &apos;-...&apos;,    &apos;C&apos; : &apos;-.-.&apos;,    &apos;D&apos; : &apos;-..&apos;,    &apos;E&apos; : &apos;.&apos;,    &apos;F&apos; : &apos;..-.&apos;,    &apos;G&apos; : &apos;--.&apos;,    &apos;H&apos; : &apos;....&apos;,    &apos;I&apos; : &apos;..&apos;,    &apos;J&apos; : &apos;.---&apos;,    &apos;K">
+  <meta name="description" content="sort() 와 sorted() 의 차이 sort() 는 리스트 자체를 정렬함 sorted() 는 리스트의 정렬된 복사본을 반환함  예를 들어 다음과 같은 리스트가 있다.lalaland = [&apos;Mia&apos;, &apos;Sebastian&apos;, &apos;Emily&apos;, &apos;Ryan&apos;] sorted() 를 하면 원래 변수는 변하지 않는다.&amp;gt;&amp;gt;&amp;gt; sorted_lalalan">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Python] 딕셔너리 key와 value 뒤집기">
-<meta property="og:url" content="https://foxsayy.github.io/2019/02/20/Python-딕셔너리-key와-value-뒤집기/index.html">
+<meta property="og:title" content="[Python] sort와 sorted">
+<meta property="og:url" content="https://foxsayy.github.io/2018/12/30/Python-sort와-sorted/index.html">
 <meta property="og:site_name" content="THE DATASCIENTIST">
-<meta property="og:description" content="딕셔너리 key와 value 바꾸기morse = &amp;#123;    &apos;A&apos; : &apos;.-&apos;,    &apos;B&apos; : &apos;-...&apos;,    &apos;C&apos; : &apos;-.-.&apos;,    &apos;D&apos; : &apos;-..&apos;,    &apos;E&apos; : &apos;.&apos;,    &apos;F&apos; : &apos;..-.&apos;,    &apos;G&apos; : &apos;--.&apos;,    &apos;H&apos; : &apos;....&apos;,    &apos;I&apos; : &apos;..&apos;,    &apos;J&apos; : &apos;.---&apos;,    &apos;K">
+<meta property="og:description" content="sort() 와 sorted() 의 차이 sort() 는 리스트 자체를 정렬함 sorted() 는 리스트의 정렬된 복사본을 반환함  예를 들어 다음과 같은 리스트가 있다.lalaland = [&apos;Mia&apos;, &apos;Sebastian&apos;, &apos;Emily&apos;, &apos;Ryan&apos;] sorted() 를 하면 원래 변수는 변하지 않는다.&amp;gt;&amp;gt;&amp;gt; sorted_lalalan">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-20T07:01:09.850Z">
+<meta property="og:updated_time" content="2019-01-11T14:54:40.635Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Python] 딕셔너리 key와 value 뒤집기">
-<meta name="twitter:description" content="딕셔너리 key와 value 바꾸기morse = &amp;#123;    &apos;A&apos; : &apos;.-&apos;,    &apos;B&apos; : &apos;-...&apos;,    &apos;C&apos; : &apos;-.-.&apos;,    &apos;D&apos; : &apos;-..&apos;,    &apos;E&apos; : &apos;.&apos;,    &apos;F&apos; : &apos;..-.&apos;,    &apos;G&apos; : &apos;--.&apos;,    &apos;H&apos; : &apos;....&apos;,    &apos;I&apos; : &apos;..&apos;,    &apos;J&apos; : &apos;.---&apos;,    &apos;K">
+<meta name="twitter:title" content="[Python] sort와 sorted">
+<meta name="twitter:description" content="sort() 와 sorted() 의 차이 sort() 는 리스트 자체를 정렬함 sorted() 는 리스트의 정렬된 복사본을 반환함  예를 들어 다음과 같은 리스트가 있다.lalaland = [&apos;Mia&apos;, &apos;Sebastian&apos;, &apos;Emily&apos;, &apos;Ryan&apos;] sorted() 를 하면 원래 변수는 변하지 않는다.&amp;gt;&amp;gt;&amp;gt; sorted_lalalan">
   
     <link rel="alternate" href="/atom.xml" title="THE DATASCIENTIST" type="application/atom+xml">
   
@@ -166,7 +166,7 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-Python-딕셔너리-key와-value-뒤집기" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-Python-sort와-sorted" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -174,7 +174,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      [Python] 딕셔너리 key와 value 뒤집기
+      [Python] sort와 sorted
     </h1>
   
 
@@ -182,18 +182,24 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2019/02/20/Python-딕셔너리-key와-value-뒤집기/" class="article-date">
-	  <time datetime="2019-02-20T06:55:25.000Z" itemprop="datePublished">February 20, 2019</time>
+	Posted on <a href="/2018/12/30/Python-sort와-sorted/" class="article-date">
+	  <time datetime="2018-12-30T06:34:21.000Z" itemprop="datePublished">December 30, 2018</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="딕셔너리-key와-value-바꾸기"><a href="#딕셔너리-key와-value-바꾸기" class="headerlink" title="딕셔너리 key와 value 바꾸기"></a>딕셔너리 key와 value 바꾸기</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">morse = &#123;</span><br><span class="line">    <span class="string">'A'</span> : <span class="string">'.-'</span>,</span><br><span class="line">    <span class="string">'B'</span> : <span class="string">'-...'</span>,</span><br><span class="line">    <span class="string">'C'</span> : <span class="string">'-.-.'</span>,</span><br><span class="line">    <span class="string">'D'</span> : <span class="string">'-..'</span>,</span><br><span class="line">    <span class="string">'E'</span> : <span class="string">'.'</span>,</span><br><span class="line">    <span class="string">'F'</span> : <span class="string">'..-.'</span>,</span><br><span class="line">    <span class="string">'G'</span> : <span class="string">'--.'</span>,</span><br><span class="line">    <span class="string">'H'</span> : <span class="string">'....'</span>,</span><br><span class="line">    <span class="string">'I'</span> : <span class="string">'..'</span>,</span><br><span class="line">    <span class="string">'J'</span> : <span class="string">'.---'</span>,</span><br><span class="line">    <span class="string">'K'</span> : <span class="string">'-.-'</span>,</span><br><span class="line">    <span class="string">'L'</span> : <span class="string">'.-..'</span>,</span><br><span class="line">    <span class="string">'M'</span> : <span class="string">'--'</span>,</span><br><span class="line">    <span class="string">'N'</span> : <span class="string">'-.'</span>,</span><br><span class="line">    <span class="string">'O'</span> : <span class="string">'---'</span>,</span><br><span class="line">    <span class="string">'P'</span> : <span class="string">'.--.'</span>,</span><br><span class="line">    <span class="string">'Q'</span> : <span class="string">'--.-'</span>,</span><br><span class="line">    <span class="string">'R'</span> : <span class="string">'.-.'</span>,</span><br><span class="line">    <span class="string">'S'</span> : <span class="string">'...'</span>,</span><br><span class="line">    <span class="string">'T'</span> : <span class="string">'-'</span>,</span><br><span class="line">    <span class="string">'U'</span> : <span class="string">'..-'</span>,</span><br><span class="line">    <span class="string">'V'</span> : <span class="string">'...-'</span>,</span><br><span class="line">    <span class="string">'W'</span> : <span class="string">'.--'</span>,</span><br><span class="line">    <span class="string">'X'</span> : <span class="string">'-..-'</span>,</span><br><span class="line">    <span class="string">'Y'</span> : <span class="string">'-.--'</span>,</span><br><span class="line">    <span class="string">'Z'</span> : <span class="string">'--..'</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위와 같은 딕셔너리에서 키와 밸류를 바꿔야 한다고 하겠습니다.<br>아래처럼 새 딕셔너리를 만든 뒤 for 문으로 키와 밸류의 자리를 바꿔 지정해주면 됩니다.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">new_morse = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> morse.items():</span><br><span class="line">    new_morse[v] = k</span><br><span class="line"></span><br><span class="line">print(new_morse)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&apos;.-&apos;: &apos;A&apos;, &apos;-...&apos;: &apos;B&apos;, &apos;-.-.&apos;: &apos;C&apos;, &apos;-..&apos;: &apos;D&apos;, &apos;.&apos;: &apos;E&apos;, &apos;..-.&apos;: &apos;F&apos;, &apos;--.&apos;: &apos;G&apos;, &apos;....&apos;: &apos;H&apos;, &apos;..&apos;: &apos;I&apos;, &apos;.---&apos;: &apos;J&apos;, &apos;-.-&apos;: &apos;K&apos;, &apos;.-..&apos;: &apos;L&apos;, &apos;--&apos;: &apos;M&apos;, &apos;-.&apos;: &apos;N&apos;, &apos;---&apos;: &apos;O&apos;, &apos;.--.&apos;: &apos;P&apos;, &apos;--.-&apos;: &apos;Q&apos;, &apos;.-.&apos;: &apos;R&apos;, &apos;...&apos;: &apos;S&apos;, &apos;-&apos;: &apos;T&apos;, &apos;..-&apos;: &apos;U&apos;, &apos;...-&apos;: &apos;V&apos;, &apos;.--&apos;: &apos;W&apos;, &apos;-..-&apos;: &apos;X&apos;, &apos;-.--&apos;: &apos;Y&apos;, &apos;--..&apos;: &apos;Z&apos;&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="sort-와-sorted-의-차이"><a href="#sort-와-sorted-의-차이" class="headerlink" title="sort() 와 sorted() 의 차이"></a><code>sort()</code> 와 <code>sorted()</code> 의 차이</h3><ul>
+<li><code>sort()</code> 는 리스트 자체를 정렬함</li>
+<li><code>sorted()</code> 는 리스트의 정렬된 복사본을 반환함</li>
+</ul>
+<p>예를 들어 다음과 같은 리스트가 있다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">lalaland = [<span class="string">'Mia'</span>, <span class="string">'Sebastian'</span>, <span class="string">'Emily'</span>, <span class="string">'Ryan'</span>]</span><br></pre></td></tr></table></figure></p>
+<p><code>sorted()</code> 를 하면 원래 변수는 변하지 않는다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted_lalaland = sorted(lalaland)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted_lalaland</span><br><span class="line">[<span class="string">'Emily'</span>, <span class="string">'Mia'</span>, <span class="string">'Ryan'</span>, <span class="string">'Sebastian'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland</span><br><span class="line">[<span class="string">'Mia'</span>, <span class="string">'Sebastian'</span>, <span class="string">'Emily'</span>, <span class="string">'Ryan'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>반면 <code>sort()</code> 를 하면 <code>lalaland</code> 자체를 정렬된 <code>lalaland</code> 로 바꾼다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland.sort()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland</span><br><span class="line">[<span class="string">'Emily'</span>, <span class="string">'Mia'</span>, <span class="string">'Ryan'</span>, <span class="string">'Sebastian'</span>]</span><br></pre></td></tr></table></figure>
+<p>정렬 방식은 기본적으로 오름차순이다. 내림차순으로 정렬하려면 인자에 <code>reverse=True</code> 를 넣어주면 된다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland.sort(reverse=<span class="keyword">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland</span><br><span class="line">[<span class="string">'Sebastian'</span>, <span class="string">'Ryan'</span>, <span class="string">'Mia'</span>, <span class="string">'Emily'</span>]</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -239,10 +245,19 @@ var themeMenus = {};
     
 <nav id="article-nav">
   
+    <a href="/2018/12/31/Python-Comprehension/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [Python] Comprehension
+        
+      </div>
+    </a>
   
-    <a href="/2019/01/12/MySQL-5-테이블-합치기/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2018/12/28/MySQL-4-2-데이터-정렬-ORDER-BY를-활용한-Natural-Sorting/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[MySQL] 5.테이블 합치기</div>
+      <div class="article-nav-title">[MySQL] 4.2 데이터 정렬 - ORDER BY를 활용한 Natural Sorting</div>
     </a>
   
 </nav>
@@ -256,7 +271,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#딕셔너리-key와-value-바꾸기"><span class="nav-number">1.</span> <span class="nav-text">딕셔너리 key와 value 바꾸기</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#sort-와-sorted-의-차이"><span class="nav-number">1.</span> <span class="nav-text">sort() 와 sorted() 의 차이</span></a></li></ol>
     
     </div>
   </aside>

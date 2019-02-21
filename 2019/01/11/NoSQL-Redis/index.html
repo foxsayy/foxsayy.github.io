@@ -13,26 +13,26 @@
   <!-- PACE Progress Bar START -->
 
   
-  <title>[python] 딕셔너리 key와 value 뒤집기 | THE DATASCIENTIST</title>
+  <title>[nosql] redis | THE DATASCIENTIST</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="python">
+  <meta name="keywords" content="NoSQL, Redis">
   
   
   
   
-  <meta name="description" content="딕셔너리 key와 value 바꾸기morse = &amp;#123;    &apos;A&apos; : &apos;.-&apos;,    &apos;B&apos; : &apos;-...&apos;,    &apos;C&apos; : &apos;-.-.&apos;,    &apos;D&apos; : &apos;-..&apos;,    &apos;E&apos; : &apos;.&apos;,    &apos;F&apos; : &apos;..-.&apos;,    &apos;G&apos; : &apos;--.&apos;,    &apos;H&apos; : &apos;....&apos;,    &apos;I&apos; : &apos;..&apos;,    &apos;J&apos; : &apos;.---&apos;,    &apos;K">
-<meta name="keywords" content="python">
+  <meta name="description" content="Redis 소개하기Redis 설치하기Redis 시작하기Redis 활용하기">
+<meta name="keywords" content="NoSQL, Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Python] 딕셔너리 key와 value 뒤집기">
-<meta property="og:url" content="https://foxsayy.github.io/2019/02/20/Python-딕셔너리-key와-value-뒤집기/index.html">
+<meta property="og:title" content="[NoSQL] Redis">
+<meta property="og:url" content="https://foxsayy.github.io/2019/01/11/NoSQL-Redis/index.html">
 <meta property="og:site_name" content="THE DATASCIENTIST">
-<meta property="og:description" content="딕셔너리 key와 value 바꾸기morse = &amp;#123;    &apos;A&apos; : &apos;.-&apos;,    &apos;B&apos; : &apos;-...&apos;,    &apos;C&apos; : &apos;-.-.&apos;,    &apos;D&apos; : &apos;-..&apos;,    &apos;E&apos; : &apos;.&apos;,    &apos;F&apos; : &apos;..-.&apos;,    &apos;G&apos; : &apos;--.&apos;,    &apos;H&apos; : &apos;....&apos;,    &apos;I&apos; : &apos;..&apos;,    &apos;J&apos; : &apos;.---&apos;,    &apos;K">
+<meta property="og:description" content="Redis 소개하기Redis 설치하기Redis 시작하기Redis 활용하기">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-20T07:01:09.850Z">
+<meta property="og:updated_time" content="2019-01-13T12:21:36.542Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Python] 딕셔너리 key와 value 뒤집기">
-<meta name="twitter:description" content="딕셔너리 key와 value 바꾸기morse = &amp;#123;    &apos;A&apos; : &apos;.-&apos;,    &apos;B&apos; : &apos;-...&apos;,    &apos;C&apos; : &apos;-.-.&apos;,    &apos;D&apos; : &apos;-..&apos;,    &apos;E&apos; : &apos;.&apos;,    &apos;F&apos; : &apos;..-.&apos;,    &apos;G&apos; : &apos;--.&apos;,    &apos;H&apos; : &apos;....&apos;,    &apos;I&apos; : &apos;..&apos;,    &apos;J&apos; : &apos;.---&apos;,    &apos;K">
+<meta name="twitter:title" content="[NoSQL] Redis">
+<meta name="twitter:description" content="Redis 소개하기Redis 설치하기Redis 시작하기Redis 활용하기">
   
     <link rel="alternate" href="/atom.xml" title="THE DATASCIENTIST" type="application/atom+xml">
   
@@ -166,7 +166,7 @@ var themeMenus = {};
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-Python-딕셔너리-key와-value-뒤집기" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+          <section id="main" style="float:none;"><article id="post-NoSQL-Redis" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -174,7 +174,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      [Python] 딕셔너리 key와 value 뒤집기
+      [NoSQL] Redis
     </h1>
   
 
@@ -182,29 +182,25 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2019/02/20/Python-딕셔너리-key와-value-뒤집기/" class="article-date">
-	  <time datetime="2019-02-20T06:55:25.000Z" itemprop="datePublished">February 20, 2019</time>
+	Posted on <a href="/2019/01/11/NoSQL-Redis/" class="article-date">
+	  <time datetime="2019-01-11T14:59:13.000Z" itemprop="datePublished">January 11, 2019</time>
 	</a>
 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="딕셔너리-key와-value-바꾸기"><a href="#딕셔너리-key와-value-바꾸기" class="headerlink" title="딕셔너리 key와 value 바꾸기"></a>딕셔너리 key와 value 바꾸기</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">morse = &#123;</span><br><span class="line">    <span class="string">'A'</span> : <span class="string">'.-'</span>,</span><br><span class="line">    <span class="string">'B'</span> : <span class="string">'-...'</span>,</span><br><span class="line">    <span class="string">'C'</span> : <span class="string">'-.-.'</span>,</span><br><span class="line">    <span class="string">'D'</span> : <span class="string">'-..'</span>,</span><br><span class="line">    <span class="string">'E'</span> : <span class="string">'.'</span>,</span><br><span class="line">    <span class="string">'F'</span> : <span class="string">'..-.'</span>,</span><br><span class="line">    <span class="string">'G'</span> : <span class="string">'--.'</span>,</span><br><span class="line">    <span class="string">'H'</span> : <span class="string">'....'</span>,</span><br><span class="line">    <span class="string">'I'</span> : <span class="string">'..'</span>,</span><br><span class="line">    <span class="string">'J'</span> : <span class="string">'.---'</span>,</span><br><span class="line">    <span class="string">'K'</span> : <span class="string">'-.-'</span>,</span><br><span class="line">    <span class="string">'L'</span> : <span class="string">'.-..'</span>,</span><br><span class="line">    <span class="string">'M'</span> : <span class="string">'--'</span>,</span><br><span class="line">    <span class="string">'N'</span> : <span class="string">'-.'</span>,</span><br><span class="line">    <span class="string">'O'</span> : <span class="string">'---'</span>,</span><br><span class="line">    <span class="string">'P'</span> : <span class="string">'.--.'</span>,</span><br><span class="line">    <span class="string">'Q'</span> : <span class="string">'--.-'</span>,</span><br><span class="line">    <span class="string">'R'</span> : <span class="string">'.-.'</span>,</span><br><span class="line">    <span class="string">'S'</span> : <span class="string">'...'</span>,</span><br><span class="line">    <span class="string">'T'</span> : <span class="string">'-'</span>,</span><br><span class="line">    <span class="string">'U'</span> : <span class="string">'..-'</span>,</span><br><span class="line">    <span class="string">'V'</span> : <span class="string">'...-'</span>,</span><br><span class="line">    <span class="string">'W'</span> : <span class="string">'.--'</span>,</span><br><span class="line">    <span class="string">'X'</span> : <span class="string">'-..-'</span>,</span><br><span class="line">    <span class="string">'Y'</span> : <span class="string">'-.--'</span>,</span><br><span class="line">    <span class="string">'Z'</span> : <span class="string">'--..'</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>위와 같은 딕셔너리에서 키와 밸류를 바꿔야 한다고 하겠습니다.<br>아래처럼 새 딕셔너리를 만든 뒤 for 문으로 키와 밸류의 자리를 바꿔 지정해주면 됩니다.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">new_morse = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> morse.items():</span><br><span class="line">    new_morse[v] = k</span><br><span class="line"></span><br><span class="line">print(new_morse)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&apos;.-&apos;: &apos;A&apos;, &apos;-...&apos;: &apos;B&apos;, &apos;-.-.&apos;: &apos;C&apos;, &apos;-..&apos;: &apos;D&apos;, &apos;.&apos;: &apos;E&apos;, &apos;..-.&apos;: &apos;F&apos;, &apos;--.&apos;: &apos;G&apos;, &apos;....&apos;: &apos;H&apos;, &apos;..&apos;: &apos;I&apos;, &apos;.---&apos;: &apos;J&apos;, &apos;-.-&apos;: &apos;K&apos;, &apos;.-..&apos;: &apos;L&apos;, &apos;--&apos;: &apos;M&apos;, &apos;-.&apos;: &apos;N&apos;, &apos;---&apos;: &apos;O&apos;, &apos;.--.&apos;: &apos;P&apos;, &apos;--.-&apos;: &apos;Q&apos;, &apos;.-.&apos;: &apos;R&apos;, &apos;...&apos;: &apos;S&apos;, &apos;-&apos;: &apos;T&apos;, &apos;..-&apos;: &apos;U&apos;, &apos;...-&apos;: &apos;V&apos;, &apos;.--&apos;: &apos;W&apos;, &apos;-..-&apos;: &apos;X&apos;, &apos;-.--&apos;: &apos;Y&apos;, &apos;--..&apos;: &apos;Z&apos;&#125;</span><br></pre></td></tr></table></figure>
-
+        <h3 id="Redis-소개하기"><a href="#Redis-소개하기" class="headerlink" title="Redis 소개하기"></a>Redis 소개하기</h3><h3 id="Redis-설치하기"><a href="#Redis-설치하기" class="headerlink" title="Redis 설치하기"></a>Redis 설치하기</h3><h3 id="Redis-시작하기"><a href="#Redis-시작하기" class="headerlink" title="Redis 시작하기"></a>Redis 시작하기</h3><h3 id="Redis-활용하기"><a href="#Redis-활용하기" class="headerlink" title="Redis 활용하기"></a>Redis 활용하기</h3>
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/Python/">Python</a>
+    <a class="article-category-link" href="/categories/NoSQL/">NoSQL</a>
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NoSQL-Redis/">NoSQL, Redis</a></li></ul>
 
       
             
@@ -239,10 +235,19 @@ var themeMenus = {};
     
 <nav id="article-nav">
   
+    <a href="/2019/01/12/MySQL-5-테이블-합치기/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [MySQL] 5.테이블 합치기
+        
+      </div>
+    </a>
   
-    <a href="/2019/01/12/MySQL-5-테이블-합치기/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2019/01/08/Python-위치-인자-모으기-arg-와-키워드-인자-모으기-kwargs/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[MySQL] 5.테이블 합치기</div>
+      <div class="article-nav-title">[Python] 위치 인자 모으기(*arg)와 키워드 인자 모으기(**kwargs)</div>
     </a>
   
 </nav>
@@ -256,7 +261,7 @@ var themeMenus = {};
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#딕셔너리-key와-value-바꾸기"><span class="nav-number">1.</span> <span class="nav-text">딕셔너리 key와 value 바꾸기</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-소개하기"><span class="nav-number">1.</span> <span class="nav-text">Redis 소개하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-설치하기"><span class="nav-number">2.</span> <span class="nav-text">Redis 설치하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-시작하기"><span class="nav-number">3.</span> <span class="nav-text">Redis 시작하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-활용하기"><span class="nav-number">4.</span> <span class="nav-text">Redis 활용하기</span></a></li></ol>
     
     </div>
   </aside>
