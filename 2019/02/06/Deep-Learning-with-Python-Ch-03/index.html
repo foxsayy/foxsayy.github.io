@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>deep learning with python - ch.03 | THE DATASCIENTIST</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Keras, Deep Learning with Python">
+  
+  
+  
+  
+  <meta name="description" content="케라스 창시자에게 배우는 딥러닝을 실습하면서 정리한 포스트입니다. 코드 예제와 코드 설명은 역자 깃허브에서 받아볼 수 있습니다. 출판물이고 개인적으로만 참고하기 위한 요약노트이다 보니 설명이 불친절한 점은 양해 바랍니다. 보다 자세한 내용을 원하시는 분은 위 링크의 책을 참고하시기 바랍니다.  3장. 신경망 시작하기신경망 구조 네트워크(모델)를 구성하는">
+<meta name="keywords" content="Keras, Deep Learning with Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Learning with Python - Ch.03">
+<meta property="og:url" content="https://foxsayy.github.io/2019/02/06/Deep-Learning-with-Python-Ch-03/index.html">
+<meta property="og:site_name" content="THE DATASCIENTIST">
+<meta property="og:description" content="케라스 창시자에게 배우는 딥러닝을 실습하면서 정리한 포스트입니다. 코드 예제와 코드 설명은 역자 깃허브에서 받아볼 수 있습니다. 출판물이고 개인적으로만 참고하기 위한 요약노트이다 보니 설명이 불친절한 점은 양해 바랍니다. 보다 자세한 내용을 원하시는 분은 위 링크의 책을 참고하시기 바랍니다.  3장. 신경망 시작하기신경망 구조 네트워크(모델)를 구성하는">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://foxsayy.github.io/image/Deep%20Learning%20with%20Python%20-%20Ch.03_01.png">
+<meta property="og:image" content="https://foxsayy.github.io/image/Deep%20Learning%20with%20Python%20-%20Ch.03_02.png">
+<meta property="og:image" content="https://foxsayy.github.io/image/Deep%20Learning%20with%20Python%20-%20Ch.03_03.png">
+<meta property="og:image" content="https://foxsayy.github.io/image/Deep%20Learning%20with%20Python%20-%20Ch.03_04.png">
+<meta property="og:updated_time" content="2019-02-14T02:00:20.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Deep Learning with Python - Ch.03">
+<meta name="twitter:description" content="케라스 창시자에게 배우는 딥러닝을 실습하면서 정리한 포스트입니다. 코드 예제와 코드 설명은 역자 깃허브에서 받아볼 수 있습니다. 출판물이고 개인적으로만 참고하기 위한 요약노트이다 보니 설명이 불친절한 점은 양해 바랍니다. 보다 자세한 내용을 원하시는 분은 위 링크의 책을 참고하시기 바랍니다.  3장. 신경망 시작하기신경망 구조 네트워크(모델)를 구성하는">
+<meta name="twitter:image" content="https://foxsayy.github.io/image/Deep%20Learning%20with%20Python%20-%20Ch.03_01.png">
+  
+    <link rel="alternate" href="/atom.xml" title="THE DATASCIENTIST" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/my.css">
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "Home"; 
+
+  themeMenus["/archives"] = "Archives"; 
+
+  themeMenus["/category/index.md"] = "Categories"; 
+
+  themeMenus["/tags"] = "Tags"; 
+
+  themeMenus["/about/index.md"] = "About"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="THE DATASCIENTIST" rel="home"> THE DATASCIENTIST </a>
+            
+          </h1>
+
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/category/index.md">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/about/index.md">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt src>
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Deep-Learning-with-Python-Ch-03" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      Deep Learning with Python - Ch.03
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2019/02/06/Deep-Learning-with-Python-Ch-03/" class="article-date">
+	  <time datetime="2019-02-05T17:02:23.000Z" itemprop="datePublished">February 6, 2019</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p><a href="https://ridibooks.com/v2/Detail?id=754024868&amp;_s=search&amp;_q=%EC%BC%80%EB%9D%BC%EC%8A%A4" target="_blank" rel="noopener">케라스 창시자에게 배우는 딥러닝</a>을 실습하면서 정리한 포스트입니다. 코드 예제와 코드 설명은 <a href="https://github.com/rickiepark/deep-learning-with-python-notebooks" target="_blank" rel="noopener">역자 깃허브</a>에서 받아볼 수 있습니다. 출판물이고 개인적으로만 참고하기 위한 요약노트이다 보니 설명이 불친절한 점은 양해 바랍니다. 보다 자세한 내용을 원하시는 분은 위 링크의 책을 참고하시기 바랍니다.</p>
+<hr>
+<h2 id="3장-신경망-시작하기"><a href="#3장-신경망-시작하기" class="headerlink" title="3장. 신경망 시작하기"></a>3장. 신경망 시작하기</h2><h3 id="신경망-구조"><a href="#신경망-구조" class="headerlink" title="신경망 구조"></a>신경망 구조</h3><ul>
+<li>네트워크(모델)를 구성하는 층</li>
+<li>입력데이터, 타겟</li>
+<li>손실 함수: 피드백 신호를 정의</li>
+<li>옵티마이저: 학습 진행 방식을 결정</li>
+</ul>
+<h4 id="층-딥러닝의-구성-단위"><a href="#층-딥러닝의-구성-단위" class="headerlink" title="층: 딥러닝의 구성 단위"></a>층: 딥러닝의 구성 단위</h4><ul>
+<li>층: 하나 이상의 텐서를 입력받아 하나 이상의 텐서를 출력하는 데이터 처리 모듈</li>
+<li>대부분 가중치라는 층의 상태를 가짐(상태가 없는 층도 존재)</li>
+<li>가중치는 확률적 경사 하강법에 의해 학습되는 하나 이상의 텐서</li>
+<li>층마다 적절한 텐서 포맷과 데이터 처리 방식이 다름<ul>
+<li>벡터 데이터(2D 텐서) : 밀집 연결 층</li>
+<li>시퀀스 데이터(3D 텐서) : LSTM 같은 순환 층</li>
+<li>이미지 데이터(4D 텐서) : Conv2D 클래스. 2D 합성곱 층</li>
+</ul>
+</li>
+<li>케라스는 호환 가능한 층(호환성: 각 층이 특정 크기의 입력 텐서만 받고 특정 크기의 출력 텐서를 반환)을 엮어 데이터 변환 파이프라인을 구성해 딥러딩 모델을 만듦</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 첫 번째 차원이 784인 2D 텐서만 입력으로 받는 층</span></span><br><span class="line"><span class="comment"># 첫 번째 차원 크기가 32로 변환된 텐서를 출력</span></span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</span><br><span class="line">layer = layers.Dense(<span class="number">32</span>, input_shape=(<span class="number">784</span>,))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>위 층에는 32차원의 벡터를 입력으로 받는 하위 층이 연결돼야 함</li>
+<li>케라스가 모델에 추가된 층을 자동으로 상위 층에 맞춰줌</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">32</span>, input_shape=(<span class="number">784</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>두 번째 층에는 input_shape 매개변수를 지정하지 않음(앞 층의 출력 크기를 입력 크기로 자동으로 채택)</li>
+</ul>
+<h4 id="모델-층의-네트워크"><a href="#모델-층의-네트워크" class="headerlink" title="모델: 층의 네트워크"></a>모델: 층의 네트워크</h4><ul>
+<li>딥러닝 모델은 층으로 만든 Directed Acyclic Graph(DAG)</li>
+<li>자주 등장하는 네트워크 구조<ul>
+<li>branch가 2개인 네트워크</li>
+<li>출력이 여러 개인 네트워크</li>
+<li>inception 블록</li>
+</ul>
+</li>
+<li>네트워크 구조는 가설 공간(가능성 있는 공간)을 정의</li>
+<li>네트워크 구조 선택 : 가설 공간을 입력 데이터에서 출력 데이터로 매핑하는 일련의 특정 텐서 연산으로 제한</li>
+<li>딱 맞는 네트워크 구조 찾기는 과학보다 예술</li>
+<li>네트워크 구조 정의 후에는 손실함수와 옵티마이저를 선택해야 함</li>
+</ul>
+<h4 id="손실-함수와-옵티마이저-학습-과정을-조절하는-열쇠"><a href="#손실-함수와-옵티마이저-학습-과정을-조절하는-열쇠" class="headerlink" title="손실 함수와 옵티마이저: 학습 과정을 조절하는 열쇠"></a>손실 함수와 옵티마이저: 학습 과정을 조절하는 열쇠</h4><ul>
+<li>손실 함수: 훈련하는 동안 최소화될 값. 문제에 대한 성공 지표</li>
+<li>옵티마이저: 손실 함수를 기반으로 네트워크가 어떻게 업데이트될지 결정.</li>
+<li>출력 여러 개를 내는 신경망은 여러 개의 손실 함수를 가질 수 있음</li>
+<li>But, 경사 하강법 과정은 하나의 스칼라 손실 값을 기준으로 함</li>
+<li>따라서 손실이 여러 개인 네트워크에서는 모든 손실이 (평균을 내서) 하나의 스칼라 양으로 합쳐짐</li>
+<li>문제에 따라 올바른 목적 함수 선택해야<ul>
+<li>2개의 클래스 분류 문제 : binary crossentropy</li>
+<li>여러개 클래스 분류 문제 : categorical crossentropy</li>
+<li>회귀 문제 : 평균 제곱 오차</li>
+<li>시퀀스 학습 문제 : Connection Temporal Classification</li>
+<li>완전히 새로운 연구: 독자적인 목적 함수</li>
+</ul>
+</li>
+</ul>
+<h3 id="케라스-소개"><a href="#케라스-소개" class="headerlink" title="케라스 소개"></a>케라스 소개</h3><ul>
+<li>생략</li>
+</ul>
+<h3 id="딥러닝-컴퓨터-셋팅"><a href="#딥러닝-컴퓨터-셋팅" class="headerlink" title="딥러닝 컴퓨터 셋팅"></a>딥러닝 컴퓨터 셋팅</h3><ul>
+<li>생략</li>
+</ul>
+<h3 id="영화-리뷰-분류-이진-분류-예제"><a href="#영화-리뷰-분류-이진-분류-예제" class="headerlink" title="영화 리뷰 분류: 이진 분류 예제"></a>영화 리뷰 분류: 이진 분류 예제</h3><p>리뷰 텍스트를 기반으로 영화 리뷰를 긍정과 부정으로 분류</p>
+<h4 id="IMDB-데이터셋"><a href="#IMDB-데이터셋" class="headerlink" title="IMDB 데이터셋"></a>IMDB 데이터셋</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> imdb</span><br><span class="line">(train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=<span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>num_words=10000 : 트레이닝셋에서 가장 많이 등장하는 단어 1만 개만 사용</li>
+<li>labels는 0(부정)과 1(긍정)을 나타내는 리스트</li>
+</ul>
+<h4 id="데이터-준비"><a href="#데이터-준비" class="headerlink" title="데이터 준비"></a>데이터 준비</h4><ul>
+<li>숫자 리스트를 신경망에 넣기 위해 텐서로 바꾸는 두 가지 방법<ul>
+<li>리스트에 padding을 추가하고 (samples, sequence-length) 크기의 정수 텐서로 변환. 신경망 첫 번째 층으로 사용</li>
+<li>리스트를 원핫인코딩해 0, 1 벡터로 변환. (아래 예시)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 정수 시퀀스를 이진 행렬로 인코딩</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vectorize_sequences</span><span class="params">(sequences, dimension=<span class="number">10000</span>)</span>:</span></span><br><span class="line">    <span class="comment"># (시퀀스 길이, 차원) 크기의 0행렬 만들기</span></span><br><span class="line">    results = np.zeros((len(sequences), dimension))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># results[i]에서 특정 인덱스 위치를 1로 바꾸기</span></span><br><span class="line">    <span class="keyword">for</span> i, sequence <span class="keyword">in</span> enumerate(sequences):</span><br><span class="line">        results[i, sequence] = <span class="number">1.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> results</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터를 벡터로 변환</span></span><br><span class="line">x_train = vectorize_sequences(train_data)</span><br><span class="line">x_test = vectorize_sequences(test_data)</span><br></pre></td></tr></table></figure>
+<p>x_train.shape, x_test.shape는 각각 (25000, 10000) 모양이 됨</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 라벨을 벡터로 바꾸기</span></span><br><span class="line">y_train = np.asarray(train_labels).astype(<span class="string">'float32'</span>)</span><br><span class="line">y_test = np.asarray(test_labels).astype(<span class="string">'float32'</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="신경망-모델-만들기"><a href="#신경망-모델-만들기" class="headerlink" title="신경망 모델 만들기"></a>신경망 모델 만들기</h4><ul>
+<li>입력 데이터는 벡터, 라벨은 1 or 0의 스칼라</li>
+<li>이런 문제에 잘 작동하는 네트워크는 relu 활성화 함수를 사용한 완전 연결 층(Dense(16, activation=’relu’))을 그냥 쌓은 것</li>
+<li>16은 은닉 유닛의 수. 하나의 은닉 유닛은 층이 나타내는 표현 공간에서 하나의 차원이 됨.</li>
+<li><code>output = relu(dot(W, input) + b)</code></li>
+<li>16개 은닉 유닛이 있다는 건 가중치 행렬 W의 크기가 (input_dimension, 16)이라는 의미. 입력 데이터와 W를 점곱하면 입력 데이터가 16차원으로 표현된 공간으로 투영됨(+ 편향 벡터 b를 더하고 relu 연산 적용)</li>
+<li>표현공간의 차원: ‘신경망이 내재된 표현을 학습할 때 가질 수 있는 자유도’</li>
+<li>중간의 은닉 층은 활성화 함수로 relu를, 마지막 층은 확률을 출력하기 위해 시그모이드 활성화 함수를 사용.</li>
+<li>relu는 음수를 0으로 만드는 함수. 시그모이드는 임의의 값을 [0, 1] 사이로 압축-&gt; 출력 값을 확률처럼 해석 가능</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 위 신경망의 케라스 구현</span></span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>이진 분류 문제고 신경망 출력이 확률 -&gt; binary_crossentropy 나 mean_squared_error</li>
+<li>binary_crossentropy<ul>
+<li>확률을 출력하는 모델 사용 시 최선의 선택</li>
+<li>크로스엔트로피: 확률 분포 간의 차이를 측정(여기선 원본 분포와 예측 분포 사이를 측정)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 모델 컴파일하기</span></span><br><span class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>,</span><br><span class="line">              loss=<span class="string">'binary_crossentropy'</span>,</span><br><span class="line">              metrics=[<span class="string">'accuracy'</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>옵티마이저의 매개변수를 바꾸거나 손실함수, 측정함수를 직접 만들어야 할 경우는 아래와 같이 설정</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 옵티마이저 설정하기</span></span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> optimizers</span><br><span class="line">model.compile(optimizer=optimizers.RMSprop(lr=<span class="number">0.001</span>),</span><br><span class="line">              loss=<span class="string">'binary_crossentropy'</span>,</span><br><span class="line">              metrics=[<span class="string">'accuracy'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 손실, 측정함수 객체로 지정하기</span></span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> losses</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> metrics</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=optimizers.RMSprop(lr=<span class="number">0.001</span>),</span><br><span class="line">             loss=losses.binary_crossentropy,</span><br><span class="line">             metrics=[metrics.binary_accuracy])</span><br></pre></td></tr></table></figure>
+<h4 id="훈련-검증"><a href="#훈련-검증" class="headerlink" title="훈련 검증"></a>훈련 검증</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 원본 훈련 데이터에서 1만개 샘플 떼어내 검증 셋 만들기</span></span><br><span class="line">x_val = x_train[:<span class="number">10000</span>]</span><br><span class="line">partial_x_train = x_train[<span class="number">10000</span>:]</span><br><span class="line">v_val = y_train[:<span class="number">10000</span>]</span><br><span class="line">partial_y_train = y_train[<span class="number">10000</span>:]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 512개 샘플씩 미니 배치를 만들어 20번의 에포크 동안 훈련</span></span><br><span class="line">history = model.fit(partial_x_train,</span><br><span class="line">                    partial_y_train,</span><br><span class="line">                    epochs=<span class="number">20</span>,</span><br><span class="line">                    batch_size=<span class="number">512</span>,</span><br><span class="line">                    validation_data=(x_val, y_val))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Train on 15000 samples, validate on 10000 samples</span><br><span class="line">Epoch 1/20</span><br><span class="line">15000/15000 [==============================] - 3s 200us/step - loss: 0.5084 - acc: 0.7810 - val_loss: 0.3798 - val_acc: 0.8683</span><br><span class="line">Epoch 2/20</span><br><span class="line">15000/15000 [==============================] - 1s 95us/step - loss: 0.3005 - acc: 0.9043 - val_loss: 0.3002 - val_acc: 0.8901</span><br><span class="line">Epoch 3/20</span><br><span class="line">15000/15000 [==============================] - 1s 95us/step - loss: 0.2179 - acc: 0.9289 - val_loss: 0.3083 - val_acc: 0.8711</span><br><span class="line">Epoch 4/20</span><br><span class="line">15000/15000 [==============================] - 2s 124us/step - loss: 0.1750 - acc: 0.9437 - val_loss: 0.2843 - val_acc: 0.8835</span><br><span class="line">Epoch 5/20</span><br><span class="line">15000/15000 [==============================] - 1s 95us/step - loss: 0.1426 - acc: 0.9542 - val_loss: 0.2842 - val_acc: 0.8870</span><br><span class="line">Epoch 6/20</span><br><span class="line">15000/15000 [==============================] - 1s 94us/step - loss: 0.1150 - acc: 0.9653 - val_loss: 0.3154 - val_acc: 0.8772</span><br><span class="line">Epoch 7/20</span><br><span class="line">15000/15000 [==============================] - 1s 95us/step - loss: 0.0978 - acc: 0.9709 - val_loss: 0.3129 - val_acc: 0.8846</span><br><span class="line">Epoch 8/20</span><br><span class="line">15000/15000 [==============================] - 1s 94us/step - loss: 0.0807 - acc: 0.9765 - val_loss: 0.3857 - val_acc: 0.8650</span><br><span class="line">Epoch 9/20</span><br><span class="line">15000/15000 [==============================] - 2s 107us/step - loss: 0.0660 - acc: 0.9820 - val_loss: 0.3636 - val_acc: 0.8782</span><br><span class="line">Epoch 10/20</span><br><span class="line">15000/15000 [==============================] - 2s 134us/step - loss: 0.0561 - acc: 0.9849 - val_loss: 0.3844 - val_acc: 0.8793</span><br><span class="line">Epoch 11/20</span><br><span class="line">15000/15000 [==============================] - 2s 137us/step - loss: 0.0436 - acc: 0.9899 - val_loss: 0.4151 - val_acc: 0.8783</span><br><span class="line">Epoch 12/20</span><br><span class="line">15000/15000 [==============================] - 2s 117us/step - loss: 0.0379 - acc: 0.9920 - val_loss: 0.4542 - val_acc: 0.8684</span><br><span class="line">Epoch 13/20</span><br><span class="line">15000/15000 [==============================] - 2s 109us/step - loss: 0.0300 - acc: 0.9929 - val_loss: 0.4703 - val_acc: 0.8728</span><br><span class="line">Epoch 14/20</span><br><span class="line">15000/15000 [==============================] - 2s 125us/step - loss: 0.0247 - acc: 0.9945 - val_loss: 0.5042 - val_acc: 0.8718</span><br><span class="line">Epoch 15/20</span><br><span class="line">15000/15000 [==============================] - 2s 132us/step - loss: 0.0192 - acc: 0.9964 - val_loss: 0.5316 - val_acc: 0.8704</span><br><span class="line">Epoch 16/20</span><br><span class="line">15000/15000 [==============================] - 2s 109us/step - loss: 0.0164 - acc: 0.9969 - val_loss: 0.5650 - val_acc: 0.8690</span><br><span class="line">Epoch 17/20</span><br><span class="line">15000/15000 [==============================] - 1s 99us/step - loss: 0.0125 - acc: 0.9981 - val_loss: 0.5973 - val_acc: 0.8668</span><br><span class="line">Epoch 18/20</span><br><span class="line">15000/15000 [==============================] - 2s 108us/step - loss: 0.0108 - acc: 0.9983 - val_loss: 0.6285 - val_acc: 0.8670</span><br><span class="line">Epoch 19/20</span><br><span class="line">15000/15000 [==============================] - 2s 109us/step - loss: 0.0079 - acc: 0.9991 - val_loss: 0.7197 - val_acc: 0.8553</span><br><span class="line">Epoch 20/20</span><br><span class="line">15000/15000 [==============================] - 1s 100us/step - loss: 0.0048 - acc: 0.9998 - val_loss: 0.6812 - val_acc: 0.8674</span><br></pre></td></tr></table></figure>
+<ul>
+<li>model.fit() 메서드는 History 객체를 반환</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 훈련과 검증 손실</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">history_dict = history.history</span><br><span class="line">loss = history_dict[<span class="string">'loss'</span>]</span><br><span class="line">val_loss = history_dict[<span class="string">'val_loss'</span>]</span><br><span class="line"></span><br><span class="line">epochs = range(<span class="number">1</span>, len(loss) + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(epochs, loss, <span class="string">'bo'</span>, label=<span class="string">'Training loss'</span>)</span><br><span class="line">plt.plot(epochs, val_loss, <span class="string">'b'</span>, label=<span class="string">'Validation loss'</span>)</span><br><span class="line">plt.title(<span class="string">'훈련과 검증 손실'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Epochs'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Loss'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/image/Deep Learning with Python - Ch.03_01.png" alt></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 훈련과 검증 정확도</span></span><br><span class="line">plt.clf()</span><br><span class="line">acc = history_dict[<span class="string">'acc'</span>]</span><br><span class="line">val_acc = history_dict[<span class="string">'val_acc'</span>]</span><br><span class="line">plt.plot(epochs, acc, <span class="string">'bo'</span>, label=<span class="string">'Training acc'</span>)</span><br><span class="line">plt.plot(epochs, val_acc, <span class="string">'b'</span>, label=<span class="string">'Validation acc'</span>)</span><br><span class="line">plt.title(<span class="string">'훈련과 검증 정확도'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Epochs'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Accuracy'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/image/Deep Learning with Python - Ch.03_02.png" alt></p>
+<ul>
+<li>훈련 손실은 에포크마다 감소, 훈련 정확도는 에포크마다 증가</li>
+<li>트레이닝셋에서 잘 작동하지만 테스트셋에서는 아님(overfitting 됐기 때문)</li>
+<li>오버피팅을 막기 위해 세번째 에포크 이후 훈련을 중지</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 처음부터 다시 훈련하기</span></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>,</span><br><span class="line">             loss=<span class="string">'binary_crossentropy'</span>,</span><br><span class="line">              metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line"></span><br><span class="line">model.fit(x_train, y_train, epochs=<span class="number">4</span>, batch_size=<span class="number">512</span>)</span><br><span class="line">model.evaluate(x_test, y_test)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Epoch 1/4</span><br><span class="line">25000/25000 [==============================] - 3s 102us/step - loss: 0.4749 - acc: 0.8216</span><br><span class="line">Epoch 2/4</span><br><span class="line">25000/25000 [==============================] - 2s 76us/step - loss: 0.2659 - acc: 0.9096</span><br><span class="line">Epoch 3/4</span><br><span class="line">25000/25000 [==============================] - 2s 70us/step - loss: 0.1983 - acc: 0.9298</span><br><span class="line">Epoch 4/4</span><br><span class="line">25000/25000 [==============================] - 2s 67us/step - loss: 0.1678 - acc: 0.9403</span><br><span class="line">25000/25000 [==============================] - 3s 140us/step</span><br><span class="line">[0.3244189430713654, 0.87316]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>87%의 정확도 달성</li>
+</ul>
+<h4 id="훈련된-모델로-새로운-데이터에-대해-예측하기"><a href="#훈련된-모델로-새로운-데이터에-대해-예측하기" class="headerlink" title="훈련된 모델로 새로운 데이터에 대해 예측하기"></a>훈련된 모델로 새로운 데이터에 대해 예측하기</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">model.predict(x_test)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">array([[0.23489225],</span><br><span class="line">       [0.99956626],</span><br><span class="line">       [0.95799285],</span><br><span class="line">       ...,</span><br><span class="line">       [0.16514498],</span><br><span class="line">       [0.11655141],</span><br><span class="line">       [0.74928373]], dtype=float32)</span><br></pre></td></tr></table></figure>
+<h3 id="뉴스-기사-분류-다중-분류-문제"><a href="#뉴스-기사-분류-다중-분류-문제" class="headerlink" title="뉴스 기사 분류: 다중 분류 문제"></a>뉴스 기사 분류: 다중 분류 문제</h3><ul>
+<li>로이터 뉴스를 46개 토픽으로 분류하는 신경망 만들기</li>
+<li>각 데이터가 하나의 카테고리로 분류되는 단일 레이블 다중 분류 문제</li>
+<li>각 데이터가 여러 개의 카테고리에 속할 수 있다면 다중 레이블 다중 분류 문제</li>
+</ul>
+<h4 id="로이터-데이터셋"><a href="#로이터-데이터셋" class="headerlink" title="로이터 데이터셋"></a>로이터 데이터셋</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 케라스에서 데이터셋 불러오기</span></span><br><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> reuters</span><br><span class="line"></span><br><span class="line">(train_data, train_labels), (test_data, test_labels) = reuters.load_data(num_words=<span class="number">10000</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>num_words=10000</code> : 데이터에서 가장 자주 등장하는 단어 10000개로 제한</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 샘플 수 확인하기</span></span><br><span class="line">len(train_data), len(test_data)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(8982, 2246)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>트레이닝셋 8982개, 테스트셋 2246개</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">train_data[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[1,</span><br><span class="line"> 227,</span><br><span class="line"> 2406,</span><br><span class="line"> 91,</span><br><span class="line"> 2,</span><br><span class="line"> 125,</span><br><span class="line"> 2855,</span><br><span class="line"> 21,</span><br><span class="line"> 4,</span><br><span class="line"> 3976,</span><br><span class="line"> 76,</span><br><span class="line"> 7,</span><br><span class="line"> 4,</span><br><span class="line"> 757,</span><br><span class="line"> 481,</span><br><span class="line"> 3976,</span><br><span class="line"> 790,</span><br><span class="line"> 5259,</span><br><span class="line"> 5654,</span><br><span class="line"> 9,</span><br><span class="line"> 111,</span><br><span class="line"> 149,</span><br><span class="line"> 8,</span><br><span class="line"> 7,</span><br><span class="line"> 10,</span><br><span class="line"> 76,</span><br><span class="line"> 223,</span><br><span class="line"> 51,</span><br><span class="line"> 4,</span><br><span class="line"> 417,</span><br><span class="line"> 8,</span><br><span class="line"> 1047,</span><br><span class="line"> 91,</span><br><span class="line"> 6917,</span><br><span class="line"> 1688,</span><br><span class="line"> 340,</span><br><span class="line"> 7,</span><br><span class="line"> 194,</span><br><span class="line"> 9411,</span><br><span class="line"> 6,</span><br><span class="line"> 1894,</span><br><span class="line"> 21,</span><br><span class="line"> 127,</span><br><span class="line"> 2151,</span><br><span class="line"> 2394,</span><br><span class="line"> 1456,</span><br><span class="line"> 6,</span><br><span class="line"> 3034,</span><br><span class="line"> 4,</span><br><span class="line"> 329,</span><br><span class="line"> 433,</span><br><span class="line"> 7,</span><br><span class="line"> 65,</span><br><span class="line"> 87,</span><br><span class="line"> 1127,</span><br><span class="line"> 10,</span><br><span class="line"> 8219,</span><br><span class="line"> 1475,</span><br><span class="line"> 290,</span><br><span class="line"> 9,</span><br><span class="line"> 21,</span><br><span class="line"> 567,</span><br><span class="line"> 16,</span><br><span class="line"> 1926,</span><br><span class="line"> 24,</span><br><span class="line"> 4,</span><br><span class="line"> 76,</span><br><span class="line"> 209,</span><br><span class="line"> 30,</span><br><span class="line"> 4033,</span><br><span class="line"> 6655,</span><br><span class="line"> 5654,</span><br><span class="line"> 8,</span><br><span class="line"> 4,</span><br><span class="line"> 60,</span><br><span class="line"> 8,</span><br><span class="line"> 4,</span><br><span class="line"> 966,</span><br><span class="line"> 308,</span><br><span class="line"> 40,</span><br><span class="line"> 2575,</span><br><span class="line"> 129,</span><br><span class="line"> 2,</span><br><span class="line"> 295,</span><br><span class="line"> 277,</span><br><span class="line"> 1071,</span><br><span class="line"> 9,</span><br><span class="line"> 24,</span><br><span class="line"> 286,</span><br><span class="line"> 2114,</span><br><span class="line"> 234,</span><br><span class="line"> 222,</span><br><span class="line"> 9,</span><br><span class="line"> 4,</span><br><span class="line"> 906,</span><br><span class="line"> 3994,</span><br><span class="line"> 8519,</span><br><span class="line"> 114,</span><br><span class="line"> 5758,</span><br><span class="line"> 1752,</span><br><span class="line"> 7,</span><br><span class="line"> 4,</span><br><span class="line"> 113,</span><br><span class="line"> 17,</span><br><span class="line"> 12]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>각 샘플은 정수 리스트</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 텍스트로 디코딩</span></span><br><span class="line">word_index = reuters.get_word_index()</span><br><span class="line">reverse_word_index = dict((value, key) <span class="keyword">for</span> (key, value) <span class="keyword">in</span> word_index.items())</span><br><span class="line">decoded_newswire = <span class="string">' '</span>.join([reverse_word_index.get(i - <span class="number">3</span>, <span class="string">'?'</span>) <span class="keyword">for</span> i <span class="keyword">in</span> train_data[<span class="number">-1</span>]])</span><br><span class="line">    <span class="comment"># 0, 1, 2는 각각 '패딩, 문서 시작, 사전에없음' 인덱스이므로 3을 뺌</span></span><br><span class="line">decoded_newswire</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;? currency fluctuations may ? their influence on the bullion market in the near future bullion bankers samuel montagu and co ltd said in a market report but the firm said silver may lag behind gold in any reactions to movements on foreign exchanges opec&apos;s failure to address the recent decline in oil prices remains a worrying factor however and on balance it appears that the market should be approached cautiously montagu said the bank said the us economy has shown no ? long term improvement and that both latin american debt and the iranian arms affair could undermine confidence in the dollar reuter 3&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">train_labels.min(), train_labels.max()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(0, 45)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>라벨은 0과 45 사이의 정수</li>
+</ul>
+<h4 id="데이터-준비-1"><a href="#데이터-준비-1" class="headerlink" title="데이터 준비"></a>데이터 준비</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 데이터를 벡터로 변환</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vectorize_sequences</span><span class="params">(sequences, dimension=<span class="number">10000</span>)</span>:</span></span><br><span class="line">    results = np.zeros((len(sequences), dimension))</span><br><span class="line">    <span class="keyword">for</span> i, sequence <span class="keyword">in</span> enumerate(sequences):</span><br><span class="line">        results[i, sequence] = <span class="number">1.</span>        </span><br><span class="line">    <span class="keyword">return</span> results</span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터를 벡터로 변환</span></span><br><span class="line">x_train = vectorize_sequences(train_data)</span><br><span class="line">x_test = vectorize_sequences(test_data)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>라벨을 벡터로 바꾸는 두 가지 방법<ul>
+<li>라벨의 리스트를 정수 텐서로 변환한따</li>
+<li>원 핫 인코딩(범주형 인코딩)(아래 예시)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 케라스 내장 함수를 사용한 원핫인코딩</span></span><br><span class="line"><span class="keyword">from</span> keras.utils.np_utils <span class="keyword">import</span> to_categorical</span><br><span class="line"></span><br><span class="line">one_hot_train_labels = to_categorical(train_labels)</span><br><span class="line">one_hot_test_labels = to_categorical(test_labels)</span><br></pre></td></tr></table></figure>
+<h4 id="모델-구성"><a href="#모델-구성" class="headerlink" title="모델 구성"></a>모델 구성</h4><ul>
+<li>출력 클래스는 46개. 규모가 작은 층을 사용하면 병목현상으로 유용한 정보를 잃게될 수 있다. 따라서 아래에선 64개 유닛을 사용한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">46</span>, activation=<span class="string">'softmax'</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>마지막 Dense 층의 크기는 46. (각 입력 샘플에 대해 46차원의 벡터를 출력)</li>
+<li>마지막 층의 softmax 활성화 함수 : 각 입력 샘플마다 46개 출력 클래스에 대한 확률 분포를 출력. 46개의 값을 더하면 1이 됨</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 모델 컴파일하기</span></span><br><span class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>,</span><br><span class="line">             loss=<span class="string">'categorical_crossentropy'</span>,</span><br><span class="line">             metrics=[<span class="string">'accuracy'</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>카테고리컬 크로스엔트로피 손실함수는 두 확률 분포 사이의 거리를 측정</li>
+<li>여기선 네트워크가 출력한 확률 분포와 진짜 라벨의 분포 사이의 거리를 측정</li>
+<li>두 분포 사이의 거리를 좁힐수록 진짜 라벨에 가까운 출력을 내도록 훈련시킨다</li>
+</ul>
+<h4 id="훈련-검증-1"><a href="#훈련-검증-1" class="headerlink" title="훈련 검증"></a>훈련 검증</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 테스트셋에서 1000개 샘플을 따로 떼어내 검증셋 준비하기</span></span><br><span class="line">x_val = x_train[:<span class="number">1000</span>]</span><br><span class="line">partial_x_train = x_train[<span class="number">1000</span>:]</span><br><span class="line">y_val = one_hot_train_labels[:<span class="number">1000</span>]</span><br><span class="line">partial_y_train = one_hot_train_labels[<span class="number">1000</span>:]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 모델 트레이닝(에포크 20번)</span></span><br><span class="line">history = model.fit(partial_x_train,</span><br><span class="line">                   partial_y_train,</span><br><span class="line">                   epochs=<span class="number">20</span>,</span><br><span class="line">                   batch_size=<span class="number">512</span>,</span><br><span class="line">                   validation_data=(x_val, y_val))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 훈련과 검증 손실</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">loss = history.history[<span class="string">'loss'</span>]</span><br><span class="line">val_loss = history.history[<span class="string">'val_loss'</span>]</span><br><span class="line"></span><br><span class="line">epochs = range(<span class="number">1</span>, len(loss) + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(epochs, loss, <span class="string">'bo'</span>, label=<span class="string">'훈련 손실'</span>)</span><br><span class="line">plt.plot(epochs, val_loss, <span class="string">'b'</span>, label=<span class="string">'검증 손실'</span>)</span><br><span class="line">plt.title(<span class="string">'훈련과 검증 손실'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Epochs'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Loss'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/image/Deep Learning with Python - Ch.03_03.png" alt></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 훈련과 검증 정확도</span></span><br><span class="line">plt.clf()</span><br><span class="line"></span><br><span class="line">acc = history.history[<span class="string">'acc'</span>]</span><br><span class="line">val_acc = history.history[<span class="string">'val_acc'</span>]</span><br><span class="line"></span><br><span class="line">plt.plot(epochs, acc, <span class="string">'bo'</span>, label=<span class="string">'훈련 정확도'</span>)</span><br><span class="line">plt.plot(epochs, val_acc, <span class="string">'b'</span>, label=<span class="string">'검증 정확도'</span>)</span><br><span class="line">plt.title(<span class="string">'훈련과 검증 정확도'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'에포크'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'정확도'</span>)</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="/image/Deep Learning with Python - Ch.03_04.png" alt></p>
+<ul>
+<li>아홉 번째 에포크 이후 오버피팅이 시작됨. 에포크 9로 새로운 모델 훈련하고 테스트셋에서 평가</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">46</span>, activation=<span class="string">'softmax'</span>))</span><br><span class="line"></span><br><span class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>,</span><br><span class="line">              loss=<span class="string">'categorical_crossentropy'</span>,</span><br><span class="line">              metrics=[<span class="string">'accuracy'</span>])</span><br><span class="line">model.fit(partial_x_train,</span><br><span class="line">          partial_y_train,</span><br><span class="line">          epochs=<span class="number">9</span>,</span><br><span class="line">          batch_size=<span class="number">512</span>,</span><br><span class="line">          validation_data=(x_val, y_val))</span><br><span class="line">results = model.evaluate(x_test, one_hot_test_labels)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">results</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 78%의 정확도</span><br><span class="line">[0.9839374910797907, 0.7858414960459524]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line">test_labels_copy = copy.copy(test_labels)</span><br><span class="line">np.random.shuffle(test_labels_copy)</span><br><span class="line">float(np.sum(np.array(test_labels) == np.array(test_labels_copy))) / len(test_labels)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0.19100623330365094</span><br></pre></td></tr></table></figure>
+<ul>
+<li>무작위 분류시의 19%에 비하면 좋은 결과!</li>
+</ul>
+<h4 id="새로운-데이터에-대해-예측하기"><a href="#새로운-데이터에-대해-예측하기" class="headerlink" title="새로운 데이터에 대해 예측하기"></a>새로운 데이터에 대해 예측하기</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 테스트셋 예측하기</span></span><br><span class="line">predictions = model.predict(x_test)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>predictions</code><ul>
+<li>각 항목은 길이가 46인 벡터</li>
+<li>이 벡터의 원소의 합은 1</li>
+<li>가장 큰 값이 가장 확률이 높은 클래스(<code>np.argmax</code> 사용)</li>
+</ul>
+</li>
+</ul>
+<h4 id="레이블과-손실을-다루는-다른-방법"><a href="#레이블과-손실을-다루는-다른-방법" class="headerlink" title="레이블과 손실을 다루는 다른 방법"></a>레이블과 손실을 다루는 다른 방법</h4><ul>
+<li>라벨을 정수 텐서로 변환해서 인코딩 할때는 손실 함수 하나만 바꾸면 된다<ul>
+<li><code>loss=sparse_categorical_crossentropy</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="주택-가격-예측-회귀-문제"><a href="#주택-가격-예측-회귀-문제" class="headerlink" title="주택 가격 예측: 회귀 문제"></a>주택 가격 예측: 회귀 문제</h3><h4 id="보스턴-주택-가격-데이터셋"><a href="#보스턴-주택-가격-데이터셋" class="headerlink" title="보스턴 주택 가격 데이터셋"></a>보스턴 주택 가격 데이터셋</h4><ul>
+<li>506개 데이터 포인트: 트레이닝셋 404개, 테스트셋 102개</li>
+<li>각 피쳐는 스케일이 다름</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> boston_housing</span><br><span class="line">(train_data, train_targets), (test_data, test_targets) = boston_housing.load_data()</span><br><span class="line"></span><br><span class="line">print(train_data.shape)</span><br><span class="line">print(test_data.shape)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(404, 13)</span><br><span class="line">(102, 13)</span><br></pre></td></tr></table></figure>
+<h4 id="데이터-준비-2"><a href="#데이터-준비-2" class="headerlink" title="데이터 준비"></a>데이터 준비</h4><ul>
+<li>상이한 스케일을 가진 값을 신경망에 주입하면 문제(학습을 어렵게 만든다)</li>
+<li>특성별로 정규화를 해보자</li>
+<li>각 특성에 대해 특성의 평균을 빼고 표준편차로 나눔</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 데이터 정규화하기</span></span><br><span class="line">mean = train_data.mean(axis=<span class="number">0</span>)</span><br><span class="line">train_data -= mean</span><br><span class="line">std = train_data.std(axis=<span class="number">0</span>)</span><br><span class="line">train_data /= std</span><br><span class="line"></span><br><span class="line">test_data -= mean</span><br><span class="line">test_data /= std</span><br></pre></td></tr></table></figure>
+<h4 id="모델-구성-1"><a href="#모델-구성-1" class="headerlink" title="모델 구성"></a>모델 구성</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 모델 정의하기</span></span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_model</span><span class="params">()</span>:</span></span><br><span class="line">    model = models.Sequential()</span><br><span class="line">    model.add(layers.Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>,</span><br><span class="line">                          input_shape=(train_data.shape[<span class="number">1</span>],)))</span><br><span class="line">    model.add(layers.Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">    model.add(layers.Dense(<span class="number">1</span>))</span><br><span class="line">    model.compile(optimizer=<span class="string">'rmsprop'</span>, loss=<span class="string">'mse'</span>, metrics=[<span class="string">'mae'</span>])</span><br><span class="line">    <span class="keyword">return</span> model</span><br></pre></td></tr></table></figure>
+<ul>
+<li>마지막 층은 선형층(하나의 유닛, 활성화 함수 없음)<ul>
+<li>전형적인 스칼라 회귀(하나의 연속적인 값을 예측하는 회귀)를 위한 구성</li>
+<li>sigmoid 활성화 함수를 적용하면 네트워크가 0과 1 사이의 값을 예측하도록 학습될 것. 여기선 선형이므로 범위 제한이 없음</li>
+</ul>
+</li>
+<li>mse(평균 제곱 오차) 손실 함수로 컴파일(예측과 타깃 사이 거리의 제곱)</li>
+<li>훈련하는 동안 mae(평균 절대 오차)를 측정(예측과 타깃 사이의 절대값)</li>
+</ul>
+<h4 id="K-겹-검증을-사용한-훈련-검증"><a href="#K-겹-검증을-사용한-훈련-검증" class="headerlink" title="K-겹 검증을 사용한 훈련 검증"></a>K-겹 검증을 사용한 훈련 검증</h4><ul>
+<li>데이터셋이 작으면 트레이닝셋과 테스트셋으로 어떤 데이터가 선택됐는지에 따라 검증 점수가 크게 달라지는데 이럴 때 사용</li>
+<li>데이터를 K개로 나누고 K개의 모델을 각각 만들어 K-1개의 분할에서 훈련하고 나머지 분할에서 평가</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">k = <span class="number">4</span></span><br><span class="line">num_val_samples = len(train_data) // k</span><br><span class="line">num_epochs = <span class="number">100</span></span><br><span class="line">all_scores = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">    print(<span class="string">"처리중인 폴드 #"</span>, i)</span><br><span class="line">    <span class="comment"># 검증 데이터 준비: k번째 분할</span></span><br><span class="line">    val_data = train_data[i * num_val_samples: (i + <span class="number">1</span>) * num_val_samples]</span><br><span class="line">    val_targets = train_targets[i * num_val_samples: (i + <span class="number">1</span>) * num_val_samples]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 훈련 데이터 준비: 다른 분할 전체</span></span><br><span class="line">    partial_train_data = np.concatenate(</span><br><span class="line">        [train_data[:i * num_val_samples],</span><br><span class="line">         train_data[(i + <span class="number">1</span>) * num_val_samples:]], axis=<span class="number">0</span>)</span><br><span class="line">    partial_train_targets = np.concatenate(</span><br><span class="line">        [train_targets[:i * num_val_samples],</span><br><span class="line">         train_targets[(i + <span class="number">1</span>) * num_val_samples:]], axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 케라스 모델 구성(컴파일 포함)</span></span><br><span class="line">    model = build_model()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 모델 훈련(verbose=0 이므로 훈련 과정 출력은 없다)</span></span><br><span class="line">    model.fit(partial_train_data, partial_train_targets,</span><br><span class="line">             epochs=num_epochs, batch_size=<span class="number">1</span>, verbose=<span class="number">0</span>)</span><br><span class="line">    val_mse, val_mae = model.evaluate(val_data, val_targets, verbose=<span class="number">0</span>)</span><br><span class="line">    all_scores.append(val_mae)</span><br><span class="line"></span><br><span class="line">print(all_scores)</span><br><span class="line">print(np.mean(all_scores))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[2.0463592958922434, 2.3122981940165603, 3.0172314785494665, 2.323145497553419]</span><br><span class="line">2.4247586165029222</span><br></pre></td></tr></table></figure>
+<ul>
+<li>4가지 검증 점수는 2.04부터 3.01까지 편차가 크지만 평균값인 2.42는 이보다 신뢰할 만하다</li>
+<li>다음은 신경망을 500 에포크 동안 훈련</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 각 폴드에서 검증점수 로그에 저장하기</span></span><br><span class="line">num_epochs = <span class="number">500</span></span><br><span class="line">all_mae_histories = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">    print(<span class="string">'처리중인 폴드 #'</span>, i)</span><br><span class="line">    val_data = train_data[i * num_val_samples: (i + <span class="number">1</span>) * num_val_samples]</span><br><span class="line">    val_targets = train_targets[i * num_val_samples: (i + <span class="number">1</span>) * num_val_samples]</span><br><span class="line">    partial_train_data = np.concatenate(</span><br><span class="line">        [train_data[:i * num_val_samples],</span><br><span class="line">         train_data[(i + <span class="number">1</span>) * num_val_samples:]], axis=<span class="number">0</span>)</span><br><span class="line">    partial_train_targets = np.concatenate(</span><br><span class="line">        [train_targets[:i * num_val_samples],</span><br><span class="line">         train_targets[(i + <span class="number">1</span>) * num_val_samples:]], axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 케라스 모델 구성(컴파일 포함)</span></span><br><span class="line">    model = build_model()</span><br><span class="line">    hisgory = model.fit(partial_train_data, partial_train_targets,</span><br><span class="line">                       validation_data=(val_data, val_targets),</span><br><span class="line">                        epochs=num_epochs, batch_size=<span class="number">1</span>, verbose=<span class="number">0</span>)</span><br><span class="line">    mae_history = history.history[<span class="string">'val_mean_absolute_error'</span>]</span><br><span class="line">    all_mae_histories.append(mae_history)</span><br></pre></td></tr></table></figure>
+<p>**</p>
+<h4 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h4><ul>
+<li>회귀는 손실함수로 평균제곱오차(MSE)를 자주 사용한다</li>
+<li>회귀는 평가 지표로 평균절대오차(MAE)를 자주 사용한다</li>
+<li>입력 피쳐들이 서로 다른 범위면 스케일을 하자</li>
+<li>트레이닝셋이 적다면 은닉층을 한 두개 정도만 사용하자</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/DSBooks/">DSBooks</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras-Deep-Learning-with-Python/">Keras, Deep Learning with Python</a></li></ul>
+
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/02/14/Deep-Learning-with-Python-Ch-04/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Deep Learning with Python - Ch.04
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/01/28/Deep-Learning-with-Python-Ch-02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Deep Learning with Python - Ch.02</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3장-신경망-시작하기"><span class="nav-number">1.</span> <span class="nav-text">3장. 신경망 시작하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#신경망-구조"><span class="nav-number">1.1.</span> <span class="nav-text">신경망 구조</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#층-딥러닝의-구성-단위"><span class="nav-number">1.1.1.</span> <span class="nav-text">층: 딥러닝의 구성 단위</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#모델-층의-네트워크"><span class="nav-number">1.1.2.</span> <span class="nav-text">모델: 층의 네트워크</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#손실-함수와-옵티마이저-학습-과정을-조절하는-열쇠"><span class="nav-number">1.1.3.</span> <span class="nav-text">손실 함수와 옵티마이저: 학습 과정을 조절하는 열쇠</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#케라스-소개"><span class="nav-number">1.2.</span> <span class="nav-text">케라스 소개</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#딥러닝-컴퓨터-셋팅"><span class="nav-number">1.3.</span> <span class="nav-text">딥러닝 컴퓨터 셋팅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#영화-리뷰-분류-이진-분류-예제"><span class="nav-number">1.4.</span> <span class="nav-text">영화 리뷰 분류: 이진 분류 예제</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IMDB-데이터셋"><span class="nav-number">1.4.1.</span> <span class="nav-text">IMDB 데이터셋</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#데이터-준비"><span class="nav-number">1.4.2.</span> <span class="nav-text">데이터 준비</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#신경망-모델-만들기"><span class="nav-number">1.4.3.</span> <span class="nav-text">신경망 모델 만들기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#훈련-검증"><span class="nav-number">1.4.4.</span> <span class="nav-text">훈련 검증</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#훈련된-모델로-새로운-데이터에-대해-예측하기"><span class="nav-number">1.4.5.</span> <span class="nav-text">훈련된 모델로 새로운 데이터에 대해 예측하기</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#뉴스-기사-분류-다중-분류-문제"><span class="nav-number">1.5.</span> <span class="nav-text">뉴스 기사 분류: 다중 분류 문제</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#로이터-데이터셋"><span class="nav-number">1.5.1.</span> <span class="nav-text">로이터 데이터셋</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#데이터-준비-1"><span class="nav-number">1.5.2.</span> <span class="nav-text">데이터 준비</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#모델-구성"><span class="nav-number">1.5.3.</span> <span class="nav-text">모델 구성</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#훈련-검증-1"><span class="nav-number">1.5.4.</span> <span class="nav-text">훈련 검증</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#새로운-데이터에-대해-예측하기"><span class="nav-number">1.5.5.</span> <span class="nav-text">새로운 데이터에 대해 예측하기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#레이블과-손실을-다루는-다른-방법"><span class="nav-number">1.5.6.</span> <span class="nav-text">레이블과 손실을 다루는 다른 방법</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#주택-가격-예측-회귀-문제"><span class="nav-number">1.6.</span> <span class="nav-text">주택 가격 예측: 회귀 문제</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#보스턴-주택-가격-데이터셋"><span class="nav-number">1.6.1.</span> <span class="nav-text">보스턴 주택 가격 데이터셋</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#데이터-준비-2"><span class="nav-number">1.6.2.</span> <span class="nav-text">데이터 준비</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#모델-구성-1"><span class="nav-number">1.6.3.</span> <span class="nav-text">모델 구성</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-겹-검증을-사용한-훈련-검증"><span class="nav-number">1.6.4.</span> <span class="nav-text">K-겹 검증을 사용한 훈련 검증</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#정리"><span class="nav-number">1.6.5.</span> <span class="nav-text">정리</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 THE DATASCIENTIST All Rights Reserved.
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="/js/my.js"></script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/category/index.md" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about/index.md" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

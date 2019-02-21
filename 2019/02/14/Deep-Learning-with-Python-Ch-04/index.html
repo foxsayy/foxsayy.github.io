@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>deep learning with python - ch.04 | THE DATASCIENTIST</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="Keras, Deep Learning with Python">
+  
+  
+  
+  
+  <meta name="description" content="케라스 창시자에게 배우는 딥러닝을 실습하면서 정리한 포스트입니다. 코드 예제와 코드 설명은 역자 깃허브에서 받아볼 수 있습니다. 출판물이고 개인적으로만 참고하기 위한 요약노트이다 보니 설명이 불친절한 점은 양해 바랍니다. 보다 자세한 내용을 원하시는 분은 위 링크의 책을 참고하시기 바랍니다.  4장. 머신러닝의 기본 요소머신러닝의 4가지 분류지도학습 가장">
+<meta name="keywords" content="Keras, Deep Learning with Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Learning with Python - Ch.04">
+<meta property="og:url" content="https://foxsayy.github.io/2019/02/14/Deep-Learning-with-Python-Ch-04/index.html">
+<meta property="og:site_name" content="THE DATASCIENTIST">
+<meta property="og:description" content="케라스 창시자에게 배우는 딥러닝을 실습하면서 정리한 포스트입니다. 코드 예제와 코드 설명은 역자 깃허브에서 받아볼 수 있습니다. 출판물이고 개인적으로만 참고하기 위한 요약노트이다 보니 설명이 불친절한 점은 양해 바랍니다. 보다 자세한 내용을 원하시는 분은 위 링크의 책을 참고하시기 바랍니다.  4장. 머신러닝의 기본 요소머신러닝의 4가지 분류지도학습 가장">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-15T09:32:40.846Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Deep Learning with Python - Ch.04">
+<meta name="twitter:description" content="케라스 창시자에게 배우는 딥러닝을 실습하면서 정리한 포스트입니다. 코드 예제와 코드 설명은 역자 깃허브에서 받아볼 수 있습니다. 출판물이고 개인적으로만 참고하기 위한 요약노트이다 보니 설명이 불친절한 점은 양해 바랍니다. 보다 자세한 내용을 원하시는 분은 위 링크의 책을 참고하시기 바랍니다.  4장. 머신러닝의 기본 요소머신러닝의 4가지 분류지도학습 가장">
+  
+    <link rel="alternate" href="/atom.xml" title="THE DATASCIENTIST" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/my.css">
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "Home"; 
+
+  themeMenus["/archives"] = "Archives"; 
+
+  themeMenus["/category/index.md"] = "Categories"; 
+
+  themeMenus["/tags"] = "Tags"; 
+
+  themeMenus["/about/index.md"] = "About"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="THE DATASCIENTIST" rel="home"> THE DATASCIENTIST </a>
+            
+          </h1>
+
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/category/index.md">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class href="/about/index.md">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt src>
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-Deep-Learning-with-Python-Ch-04" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      Deep Learning with Python - Ch.04
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2019/02/14/Deep-Learning-with-Python-Ch-04/" class="article-date">
+	  <time datetime="2019-02-14T02:00:45.000Z" itemprop="datePublished">February 14, 2019</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p><a href="https://ridibooks.com/v2/Detail?id=754024868&amp;_s=search&amp;_q=%EC%BC%80%EB%9D%BC%EC%8A%A4" target="_blank" rel="noopener">케라스 창시자에게 배우는 딥러닝</a>을 실습하면서 정리한 포스트입니다. 코드 예제와 코드 설명은 <a href="https://github.com/rickiepark/deep-learning-with-python-notebooks" target="_blank" rel="noopener">역자 깃허브</a>에서 받아볼 수 있습니다. 출판물이고 개인적으로만 참고하기 위한 요약노트이다 보니 설명이 불친절한 점은 양해 바랍니다. 보다 자세한 내용을 원하시는 분은 위 링크의 책을 참고하시기 바랍니다.</p>
+<hr>
+<h2 id="4장-머신러닝의-기본-요소"><a href="#4장-머신러닝의-기본-요소" class="headerlink" title="4장. 머신러닝의 기본 요소"></a>4장. 머신러닝의 기본 요소</h2><h3 id="머신러닝의-4가지-분류"><a href="#머신러닝의-4가지-분류" class="headerlink" title="머신러닝의 4가지 분류"></a>머신러닝의 4가지 분류</h3><h4 id="지도학습"><a href="#지도학습" class="headerlink" title="지도학습"></a>지도학습</h4><ul>
+<li>가장 흔한 경우. 앞의 예제들과 광학 문자 판독, 음성 인식, 이미지 분류, 번역 등</li>
+<li>대부분 회귀지만 이런 변종도 있음<ul>
+<li>sequence generation: 사진이 주어지면 이를 설명하는 캡션 생성</li>
+<li>syntax tree expectation: 문장이 주어지면 분해된 구문 트리를 예측</li>
+<li>object detection: 사진 안의 특정 물체에 bounding box를 그림</li>
+<li>image segmentation: 사진을 픽셀 단위로 특정 물체에 masking</li>
+</ul>
+</li>
+</ul>
+<h4 id="비지도학습"><a href="#비지도학습" class="headerlink" title="비지도학습"></a>비지도학습</h4><ul>
+<li>타깃 사용하지 않고 입력에 대한 흥미로운 변환을 찾는다</li>
+<li>데이터 시각화, 데이터 압축, 데이터 노이즈 제거, 상관관계 이해에 사용</li>
+<li>차원 축소와 클러스터링</li>
+</ul>
+<h4 id="자기지도학습"><a href="#자기지도학습" class="headerlink" title="자기지도학습"></a>자기지도학습</h4><ul>
+<li>지도학습의 특별한 경우. 지도학습이지만 사람이 만든 라벨을 사용하지 않음</li>
+<li>라벨이 필요하지만 휴리스틱 알고리즘(경험적인 알고리즘)을 사용해 입력 데이터에서 생성</li>
+<li>ex) 오토인코더, 지난 프레임이 주어졌을 때 다음 프레임을 예측, 단어가 주어졌을때 다음 단어를 예측</li>
+</ul>
+<h4 id="강화학습"><a href="#강화학습" class="headerlink" title="강화학습"></a>강화학습</h4><ul>
+<li>자율주행 자동차, 자원 관리, 교육 등에서 애플리케이션 등장 예상됨</li>
+</ul>
+<h3 id="머신러닝-모델-평가"><a href="#머신러닝-모델-평가" class="headerlink" title="머신러닝 모델 평가"></a>머신러닝 모델 평가</h3><ul>
+<li>과대적합을 완화하고 일반화를 최대화하기 위한 전략(처음 본 데이터에서 잘 작동하는 모델 찾기)</li>
+</ul>
+<h4 id="훈련-검증-테스트셋"><a href="#훈련-검증-테스트셋" class="headerlink" title="훈련, 검증, 테스트셋"></a>훈련, 검증, 테스트셋</h4><ul>
+<li>데이터가 적을 때 데이터셋을 나누려면 다음과 같은 고급 기법이 도움이 됨<ul>
+<li>단순 홀드아웃 검증: 데이터 일부를 테스트셋으로 떼어 둠</li>
+<li>K-겹 교차검증: 데이터를 동일한 크기를 가진 K개 분할로 나눠 각 분할 i에 대해 남은 K-1개의 분할로 모델을 훈련하고 분할 i 에서 모델을 평가</li>
+<li>셔플링을 사용한 반복 K-겹 교차 검증: K개의 분할로 나누기 전에 매번 데이터를 무작위로 섞기</li>
+</ul>
+</li>
+</ul>
+<h4 id="기억해야-할-것"><a href="#기억해야-할-것" class="headerlink" title="기억해야 할 것"></a>기억해야 할 것</h4><ul>
+<li>대표성 있는 데이터를 골라야 한다. 타깃이 0~9까지 9가지 숫자인데 테스트셋에 타깃이 0~7까지 있는 데이터만 넣는다면?</li>
+<li>시간의 방향: 과거로부터 미래를 예측하려고 한다면 테스트셋에 있는 데이터가 트레이닝셋 데이터보다 미래에 있어야 한다</li>
+<li>데이터 중복: 한 데이터셋에 같은 데이터가 두 번 등장하면 트레이닝셋의 일부로 테스트를 하는 일이 발생할 수 있다.</li>
+</ul>
+<h3 id="데이터-전처리-피쳐-엔지니어링-피쳐-학습"><a href="#데이터-전처리-피쳐-엔지니어링-피쳐-학습" class="headerlink" title="데이터 전처리, 피쳐 엔지니어링, 피쳐 학습"></a>데이터 전처리, 피쳐 엔지니어링, 피쳐 학습</h3><h4 id="신경망을-위한-데이터-전처리"><a href="#신경망을-위한-데이터-전처리" class="headerlink" title="신경망을 위한 데이터 전처리"></a>신경망을 위한 데이터 전처리</h4><ul>
+<li>원본 데이터를 신경망에 적용하기 쉽게 만들기 위해 데이터를 전처리</li>
+<li>벡터화<ul>
+<li>신경망에서 모든 입력과 타깃은 부동 소수 데이터로 이뤄진 텐서여야 함(특정 경우에는 정수로 이뤄진 텐서)</li>
+<li>데이터가 사운드 이미지 텍스트 뭐든 일단 텐서로 변환</li>
+</ul>
+</li>
+<li>값 정규화<ul>
+<li>(MNIST) 숫자 이미지를 그레이스케일 인코딩인 0~255 사이의 정수로 인코딩. 이를 네트워크에 주입하기 전 float32 타입으로 변경하고 255로 나눠 최종적으로 0~1 사이의 부동 소수 값으로 만듦.</li>
+<li>(보스턴 집값) 데이터를 네트워크에 주입하기 전 각 특성을 정규화해 평균 0, 표준편차 1이 되도록 만듦</li>
+<li>비교적 큰 값이나 균일하지 않은 데이터를 신경망에 주입하는건 위험(업데이트할 그래디언트가 커져 네트워크가 수렴하는걸 방해함)</li>
+<li>대부분 값이 0~1 사이, 모든 특성이 대체로 비슷한 범위를 가질수록 네트워크를 쉽게 학습시킬 수있음</li>
+<li>도움이 되는 정규화 방법</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x -= x.mean(axix=<span class="number">0</span>)</span><br><span class="line">x /= x.std(axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>누락값 처리<ul>
+<li>일반적으로 0이 사전에 정의된 의미 있는 값이 아니라면 누락값을 0으로 처리해도 괜찮음</li>
+<li>트레이닝셋에는 누락값이 없는데 테스트셋에 누락값이 있을 가능성이 있다면 트레이닝셋에 고의적으로 누락값이 있는 샘플을 만들어야 함</li>
+</ul>
+</li>
+</ul>
+<h4 id="특성-공학"><a href="#특성-공학" class="headerlink" title="특성 공학"></a>특성 공학</h4><ul>
+<li>모델이 수월하게 작업할 수 있는 어떤 방식으로 데이터가 표현될 필요</li>
+</ul>
+<h3 id="과대적합과-과소적합"><a href="#과대적합과-과소적합" class="headerlink" title="과대적합과 과소적합"></a>과대적합과 과소적합</h3><ul>
+<li>언더피팅<ul>
+<li>훈련 데이터의 손실이 낮아질수록 테스트 데이터의 손실도 낮아짐</li>
+<li>모델의 성능이 계속 발전될 여지가 있음</li>
+</ul>
+</li>
+<li>오버피팅<ul>
+<li>어느 시점부터 일반화 성능이 더 높아지지 않음</li>
+<li>검증 세트의 성능이 멈추고 감소하기 시작</li>
+<li>훈련 데이터에 특화된 패턴을 학습하기 시작했다는 의미</li>
+</ul>
+</li>
+<li>regularization<ul>
+<li>과대적합을 피하는 저리 과정</li>
+</ul>
+</li>
+</ul>
+<h4 id="네트워크-크기-축소"><a href="#네트워크-크기-축소" class="headerlink" title="네트워크 크기 축소"></a>네트워크 크기 축소</h4><ul>
+<li>오버피팅을 막는 가장 단순한 방법은 모델에 있는 학습 파라미터의 수를 줄이는 것</li>
+<li>파라미터의 수(모델의 용량)는 층의 수와 각 층의 유닛 수에 의해 결정</li>
+<li>언더피팅되지 않도록 충분한 파라미터를 가진 모델을 사용해야 함.</li>
+<li>데이터에 알맞은 모델 크기를 찾으려면 각기 다른 구조를 평가해봐야 함<ul>
+<li>비교적 적은 수의 층과 파라미터로 시작해 검증 손실이 감소되기 시작할 때까지 층이나 유닛 수를 늘리는게 일반적인 작업 흐름</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 원본 모델</span></span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 작은 용량의 모델</span></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">6</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">6</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 큰 용량의 모델</span></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">1024</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">1024</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>작은 네트워크가 기본 네트워크보다 더 나중에 과대적합되기 시작. 과대적합이 시작됐을 때 성능이 더 천천히 감소</li>
+<li>용량이 큰 네트워크는 빨리 과대적합이 시작돼 갈수록 더 심해짐. 검증손실도 불안정</li>
+<li>용량이 큰 네트워크일수록 빠르게 훈련 데이터를 모델링하지만 과대적합에 민감해짐(트레이닝과 테스트 손실 사이 차이 발생)</li>
+</ul>
+<h4 id="가중치-규제-추가"><a href="#가중치-규제-추가" class="headerlink" title="가중치 규제 추가"></a>가중치 규제 추가</h4><ul>
+<li>오캄의 면도날 이론<ul>
+<li>두 가지 설명이 있다면 더 적은 가정이 필요한 간단한 설명이 옳다는 이론</li>
+<li>신경망 학습모델에도 적용됨. 복잡한 모델이 간단한 모델보다 과대적합될 가능성이 높음</li>
+</ul>
+</li>
+<li>간단한 모델이란 파라미터 값 분포의 엔트로피가 작은 모델(혹은 적은 수의 파라미터를 가진 모델)</li>
+<li>과대적합 완화법: 네트워크의 복잡도에 제한을 둬서 가중치가 작은 값을 가지도록 강제하는 것</li>
+<li>가중치 값의 분포가 더 균일해짐(가중치 규제) -&gt; 네트워크의 손실 함수에 큰 가중치에 연관된 두 가지 형태의 비용을 추가함<ul>
+<li>L1 규제: 가중치의 절댓값에 비례하는 비용이 추가됨(가중치의 L1 norm)</li>
+<li>L2 규제(=가중치 감쇠, weight decay): 가중치의 제곱에 비례하는 비용이 추가됨(가중치의 L2 norm).</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 모델에 L2 가중치 추가하기</span></span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> regularizers</span><br><span class="line"></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, kernel_regularizer=regularizers.l2(<span class="number">0.001</span>),</span><br><span class="line">                       activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, kernel_regularizer=regularizers.l2(<span class="number">0.001</span>),</span><br><span class="line">                       activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>l2(0.001)는 가중치 행렬의 모든 원소를 제곱하고 0.001을 곱해 네트워크 전체 손실에 더해진다는 의미. 이 페널티 항은 트레이닝에서만 추가됨</li>
+<li>L2 규제를 사용한 모델이 사용하지 않은 모델보다 과대적합을 잘 견딤(에포크 반복에 따라 loss가 덜 오름)</li>
+<li>L2 규제 대신 사용 가능한 옵션<ul>
+<li>L1 규제 <code>regularizers.l1(0.001)</code></li>
+<li>L1, L2 규제 병행 <code>regularizers.l1_l2(l1=0.001, l2=0.001)</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="dropout-추가"><a href="#dropout-추가" class="headerlink" title="dropout 추가"></a>dropout 추가</h4><ul>
+<li>네트워크 층에 드랍아웃을 적용하면 트레이닝 동안 랜덤으로 층의 일부 출력 특성을 제외시킴(0으로..)<ul>
+<li>ex) 한 층이 트레이닝되는 동안 어떤 입력샘플에 대해 [0.2, 0.5, 1.3, 0.8, 1.1] 벡터를 출력한다고 가정하면, 일부가 무작위로 0이 됨([0, 0.5, 1.3, 0, 1.1]</li>
+</ul>
+</li>
+<li>드랍아웃 비율은 0이 될 특성의 비율(대개 0.2~0.5 로 지정)</li>
+<li><p>테스트 단계에서는 드랍아웃이 일어나지 않는다</p>
+</li>
+<li><p><code>layer_output *= np.random.randint(0, high=2, size=layer_output.shape)</code> : 트레이닝시 유닛의 출력 중 50%를 버림</p>
+</li>
+<li>테스트 시 드랍아웃 비율로 출력을 낮춰야: <code>layer_output *= 0.5</code></li>
+<li>드랍아웃이 과대적합을 줄이는 원리<ul>
+<li>층의 출력값에 노이즈를 추가해 중요하지 않은 우연한 패턴을 깨뜨림</li>
+</ul>
+</li>
+<li>케라스에선 층의 출력 바로 뒤에 Dropout 층을 추가해 네트워크에 드랍아웃 적용 가능</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># IMDB 네트워크에 드랍아웃 추가</span></span><br><span class="line">model = models.Sequential()</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">10000</span>,)))</span><br><span class="line">model.add(layers.Dropout(<span class="number">0.5</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">16</span>, activation=<span class="string">'relu'</span>))</span><br><span class="line">model.add(layers.Dropout(<span class="number">0.5</span>))</span><br><span class="line">model.add(layers.Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="보편적인-머신러닝-작업-흐름"><a href="#보편적인-머신러닝-작업-흐름" class="headerlink" title="보편적인 머신러닝 작업 흐름"></a>보편적인 머신러닝 작업 흐름</h3><h4 id="문제-정의와-데이터셋-수집"><a href="#문제-정의와-데이터셋-수집" class="headerlink" title="문제 정의와 데이터셋 수집"></a>문제 정의와 데이터셋 수집</h4><ul>
+<li>무엇을 예측할 것인가</li>
+<li>입력 데이터는?</li>
+<li>어떤 종류의 문제인가? (이진분류 / 다중분류 / 스칼라 회귀 / 벡터회귀 / 다중 레이블 분류 / 군집 / 생성 / 강화학습)</li>
+<li>입력과 출력이 무엇인지</li>
+</ul>
+<h4 id="성공-지표-선택"><a href="#성공-지표-선택" class="headerlink" title="성공 지표 선택"></a>성공 지표 선택</h4><ul>
+<li>클래스 분포가 균일한 분류 문제<ul>
+<li>정확도와 ROC AUC</li>
+</ul>
+</li>
+<li>클래스 분폴가 균일하지 않은 문제<ul>
+<li>정밀도와 재현율</li>
+</ul>
+</li>
+<li>랭킹 문제나 다중 레이블 문제<ul>
+<li>평균 정밀도</li>
+</ul>
+</li>
+</ul>
+<h4 id="평가-방법-선택"><a href="#평가-방법-선택" class="headerlink" title="평가 방법 선택"></a>평가 방법 선택</h4><ul>
+<li>현재의 진척 상황 평가법<ul>
+<li>홀드아웃 검증 세트 분리(데이터가 풍부할 때)</li>
+<li>K-겹 교차 검증(샘플 수가 너무 적을 때)</li>
+<li>반복 K-겹 교차 검증(데이터가 적고 정확한 모델 평가 필요시)</li>
+</ul>
+</li>
+</ul>
+<h4 id="데이터-준비"><a href="#데이터-준비" class="headerlink" title="데이터 준비"></a>데이터 준비</h4><ul>
+<li>머신러닝 모델을 심층 신경망이라 가정<ul>
+<li>데이터는 텐서로 구성</li>
+<li>텐서에 있는 값은 일반적으로 작은 값으로 스케일 조정돼 있음 [-1, 1] or [0, 1]</li>
+<li>특성마다 범위가 다르면 정규화</li>
+<li>피처 엔지니어링</li>
+</ul>
+</li>
+</ul>
+<h4 id="기본보다-나은-모델-훈련하기"><a href="#기본보다-나은-모델-훈련하기" class="headerlink" title="기본보다 나은 모델 훈련하기"></a>기본보다 나은 모델 훈련하기</h4><ul>
+<li>통계적 검정력을 달성하는게 목표</li>
+<li>MNIST에서 통계적 검정력을 달성하려면 0.1보다 높은 정확도를 내는 모델이어야 함</li>
+<li>모델을 위해 고려할 세 가지<ul>
+<li>마지막 층의 활성화 함수: 네트워크 출력에 필요한 제한을 가함. IMDB 분류에선 마지막 층에 시그모이드 함수 사용. 회귀에서는 마지막 층에 활성화 함수 사용 안함</li>
+<li>손실 함수: 풀려고 하는 문제의 종류에 적합해야. IMDB에선 binary_crossentropy, 회귀에선 mse.</li>
+<li>최적화 설정: 대부분의 경우 rmsprop과 기본 학습률 사용하는게 무난함</li>
+</ul>
+</li>
+<li>손실함수는 미니 배치 데이터에서 계산 가능해야 하고 미분 가능해야 함</li>
+<li>문제 유형에 따른 마지막층 활성화 함수와 손실 함수 선택<ul>
+<li>이진 분류<ul>
+<li>시그모이드 / binary_crossentropy</li>
+</ul>
+</li>
+<li>단일 레이블 다중 분류<ul>
+<li>소프트맥스 / categorical_crossentropy</li>
+</ul>
+</li>
+<li>다중 레이블 다중 분류<ul>
+<li>시그모이드 / binary_crossentropy</li>
+</ul>
+</li>
+<li>임의 값에 대한 회귀<ul>
+<li>없음 / mse</li>
+</ul>
+</li>
+<li>0과 1 가시 값에 대한 회귀<ul>
+<li>시그모이드 / mse or binary_crossentropy</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="몸집-키우기-과대적합-모델-구축"><a href="#몸집-키우기-과대적합-모델-구축" class="headerlink" title="몸집 키우기: 과대적합 모델 구축"></a>몸집 키우기: 과대적합 모델 구축</h4><ul>
+<li>머신러닝은 최적화와 일반화 사이의 줄다리기<ul>
+<li>과소적합과 과대적합 사이</li>
+<li>과소용량과 과대용량 사이</li>
+</ul>
+</li>
+<li>얼마나 큰 모델을 만들어야 할까? 일단 과대적합된 모델을 만들어본다<ol>
+<li>층을 추가</li>
+<li>층의 크기를 키움</li>
+<li>더 많은 에포크 동안 트레이닝</li>
+</ol>
+</li>
+<li>훈련 손실과 검증 손실을 모니터링. 검증 데이터에서 모델 성능이 감소하기 시작했을 때 과대적합에 도달한 것</li>
+</ul>
+<h4 id="모델-규제와-하이퍼파라미터-튜닝"><a href="#모델-규제와-하이퍼파라미터-튜닝" class="headerlink" title="모델 규제와 하이퍼파라미터 튜닝"></a>모델 규제와 하이퍼파라미터 튜닝</h4><ul>
+<li>드랍아웃 추가</li>
+<li>층을 추가하거나 제거</li>
+<li>L1, L2 또는 둘 다를 추가해보기</li>
+<li>하이퍼파라미터를 바꿔보기(층의 유닛 수나 옵티마이저의 학습률 등)</li>
+<li>피처 엔지니어링</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/DSBooks/">DSBooks</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras-Deep-Learning-with-Python/">Keras, Deep Learning with Python</a></li></ul>
+
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/02/15/Deep-Learning-with-Python-Ch-05/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Deep Learning with Python - Ch.05
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/06/Deep-Learning-with-Python-Ch-03/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Deep Learning with Python - Ch.03</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4장-머신러닝의-기본-요소"><span class="nav-number">1.</span> <span class="nav-text">4장. 머신러닝의 기본 요소</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#머신러닝의-4가지-분류"><span class="nav-number">1.1.</span> <span class="nav-text">머신러닝의 4가지 분류</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#지도학습"><span class="nav-number">1.1.1.</span> <span class="nav-text">지도학습</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#비지도학습"><span class="nav-number">1.1.2.</span> <span class="nav-text">비지도학습</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#자기지도학습"><span class="nav-number">1.1.3.</span> <span class="nav-text">자기지도학습</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#강화학습"><span class="nav-number">1.1.4.</span> <span class="nav-text">강화학습</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#머신러닝-모델-평가"><span class="nav-number">1.2.</span> <span class="nav-text">머신러닝 모델 평가</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#훈련-검증-테스트셋"><span class="nav-number">1.2.1.</span> <span class="nav-text">훈련, 검증, 테스트셋</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#기억해야-할-것"><span class="nav-number">1.2.2.</span> <span class="nav-text">기억해야 할 것</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#데이터-전처리-피쳐-엔지니어링-피쳐-학습"><span class="nav-number">1.3.</span> <span class="nav-text">데이터 전처리, 피쳐 엔지니어링, 피쳐 학습</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#신경망을-위한-데이터-전처리"><span class="nav-number">1.3.1.</span> <span class="nav-text">신경망을 위한 데이터 전처리</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#특성-공학"><span class="nav-number">1.3.2.</span> <span class="nav-text">특성 공학</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#과대적합과-과소적합"><span class="nav-number">1.4.</span> <span class="nav-text">과대적합과 과소적합</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#네트워크-크기-축소"><span class="nav-number">1.4.1.</span> <span class="nav-text">네트워크 크기 축소</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#가중치-규제-추가"><span class="nav-number">1.4.2.</span> <span class="nav-text">가중치 규제 추가</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dropout-추가"><span class="nav-number">1.4.3.</span> <span class="nav-text">dropout 추가</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#보편적인-머신러닝-작업-흐름"><span class="nav-number">1.5.</span> <span class="nav-text">보편적인 머신러닝 작업 흐름</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#문제-정의와-데이터셋-수집"><span class="nav-number">1.5.1.</span> <span class="nav-text">문제 정의와 데이터셋 수집</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#성공-지표-선택"><span class="nav-number">1.5.2.</span> <span class="nav-text">성공 지표 선택</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#평가-방법-선택"><span class="nav-number">1.5.3.</span> <span class="nav-text">평가 방법 선택</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#데이터-준비"><span class="nav-number">1.5.4.</span> <span class="nav-text">데이터 준비</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#기본보다-나은-모델-훈련하기"><span class="nav-number">1.5.5.</span> <span class="nav-text">기본보다 나은 모델 훈련하기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#몸집-키우기-과대적합-모델-구축"><span class="nav-number">1.5.6.</span> <span class="nav-text">몸집 키우기: 과대적합 모델 구축</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#모델-규제와-하이퍼파라미터-튜닝"><span class="nav-number">1.5.7.</span> <span class="nav-text">모델 규제와 하이퍼파라미터 튜닝</span></a></li></ol></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2019 THE DATASCIENTIST All Rights Reserved.
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="/js/my.js"></script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/category/index.md" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about/index.md" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

@@ -161,7 +161,7 @@ var themeMenus = {};
         
           <section id="main">
   
-    <article id="post-MySQL-3-2-데이터-필터링-AND" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Crawling-RIDISELECT" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -169,7 +169,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/12/10/MySQL-3-2-데이터-필터링-AND/">[MySQL] 3.2 데이터 필터링 - AND</a>
+      <a class="article-title" href="/2018/12/29/Crawling-RIDISELECT/">[Crawling] RIDISELECT</a>
     </h1>
   
 
@@ -177,8 +177,67 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2018/12/10/MySQL-3-2-데이터-필터링-AND/" class="article-date">
-	  <time datetime="2018-12-10T10:07:57.000Z" itemprop="datePublished">December 10, 2018</time>
+	Posted on <a href="/2018/12/29/Crawling-RIDISELECT/" class="article-date">
+	  <time datetime="2018-12-28T21:17:24.000Z" itemprop="datePublished">December 29, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="리디셀렉트-보유-도서-리스트-만들기"><a href="#리디셀렉트-보유-도서-리스트-만들기" class="headerlink" title="리디셀렉트 보유 도서 리스트 만들기"></a>리디셀렉트 보유 도서 리스트 만들기</h3><p>리디셀렉트를 구독 신청을 하기 전에는 도서 검색이 안 된다. 아래 사이트에서 페이지를 하나하나 넘겨가면서 무슨 책들이 있는지 볼 수밖에 없다.<br><a href="https://select.ridibooks.com/books" target="_blank" rel="noopener">https://select.ridibooks.com/books</a><br>도서 리스트가 있으면 검색하기와 읽고 싶은 책 고르기가 편할 것 같아서 셀레늄으로 책 제목들을 긁어와 도서 리스트를 만들어 봤다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> time</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 브라우저 열기</span></span><br><span class="line">driver = webdriver.Chrome()</span><br></pre></td></tr></table></figure>
+<p>책 목록이 109페이지까지 있는 건 끝으로 가기 버튼을 눌러 확인했다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">book_list = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">109</span>):</span><br><span class="line">    url = <span class="string">"https://select.ridibooks.com/books?page=&#123;&#125;"</span>.format(i)</span><br><span class="line">    driver.get(url)</span><br><span class="line">    time.sleep(<span class="number">2</span>)</span><br><span class="line">    book = driver.find_element_by_css_selector(<span class="string">".GridBookList"</span>).text.split(<span class="string">"\n"</span>)</span><br><span class="line">    book_list.append(book)</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 브라우저 닫기</span></span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<p>페이지별로 제목을 긁어오기 때문에 리스트 속의 리스트 형태로 저장되는데 이를 하나의 리스트로 변환해 준다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ls = sum(book_list, [])</span><br></pre></td></tr></table></figure>
+<p>리스트가 완성됐으니 csv 파일로 리스트를 만든다. 판다스 데이터프레임으로 만든 뒤 csv 파일로 내보냈다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">df = pd.DataFrame(&#123;<span class="string">"title"</span>: ls&#125;)</span><br><span class="line">df.to_csv(<span class="string">"ridiselect.csv"</span>, mode=<span class="string">'w'</span>)</span><br></pre></td></tr></table></figure>
+<p>csv 파일을 열어서 보고 싶은 책이 있는지 쉽게 검색할 수 있다. 구독한 후에는 보고싶은 책을 미리 체크해두면 좋다.</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/crawling/">crawling</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crawling/">crawling</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-MySQL-4-2-데이터-정렬-ORDER-BY를-활용한-Natural-Sorting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/12/28/MySQL-4-2-데이터-정렬-ORDER-BY를-활용한-Natural-Sorting/">[MySQL] 4.2 데이터 정렬 - ORDER BY를 활용한 Natural Sorting</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2018/12/28/MySQL-4-2-데이터-정렬-ORDER-BY를-활용한-Natural-Sorting/" class="article-date">
+	  <time datetime="2018-12-28T06:57:59.000Z" itemprop="datePublished">December 28, 2018</time>
 	</a>
 
       
@@ -186,50 +245,28 @@ var themeMenus = {};
     <div class="article-entry" itemprop="articleBody">
       
         <hr>
-<p><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a> 내용을 따라 익히며 정리한 글입니다. 예시에 나오는 데이터셋은 MySQL 샘플 데이터셋인 <code>classicmodels</code> DB입니다.</p>
+<p><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a> 내용을 따라 익히며 정리한 글입니다.</p>
 <hr>
-<h3 id="1-연산자-AND-소개"><a href="#1-연산자-AND-소개" class="headerlink" title="1. 연산자 AND 소개"></a>1. 연산자 <code>AND</code> 소개</h3><p>논리 연산자 <code>AND</code> 는 <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code> 문의 <code>WHERE</code> 절에서 자주 사용된다.</p>
-<p>두 개 이상의 불리언 값을 받아 모두 <code>True</code> 이면 <code>True</code> 를 리턴한다.</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>TRUE</th>
-<th>FALSE</th>
-<th>NULL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>TRUE</strong></td>
-<td>TRUE</td>
-<td>FALSE</td>
-<td>NULL</td>
-</tr>
-<tr>
-<td><strong>FALSE</strong></td>
-<td>FALSE</td>
-<td>FALSE</td>
-<td>FALSE</td>
-</tr>
-<tr>
-<td><strong>NULL</strong></td>
-<td>NULL</td>
-<td>FALSE</td>
-<td>NULL</td>
-</tr>
-</tbody>
-</table>
-<p>MySQL은 <code>AND</code> 연산자가 있는 표현식을 평가하면서 결과가 확실하게 예측되고 나면 나머지 연산을 하지 않는다. (Short Circuit Evaluation) <code>AND</code> 앞에서 <code>False</code>가 나오면 <code>AND</code> 뒤에 나오는 연산은 생략한다는 의미다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="number">1</span> = <span class="number">0</span> <span class="keyword">AND</span> <span class="number">1</span> / <span class="number">0</span> ;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-------------+</span><br><span class="line">| 1=0 and 1/0 |</span><br><span class="line">+-------------+</span><br><span class="line">|           0 |</span><br><span class="line">+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<p>MySQL에서 <code>0</code>은 <code>FALSE</code>로, <code>0</code> 이 아닌 값들은 <code>TRUE</code> 로 다뤄진다.<br>위 예에서 <code>1 = 0</code> 은 <code>FALSE</code> 를 리턴한다. Short Circuit Evaluation에 따라 <code>1 / 0</code> 연산은 하지도 않았다. 만약 연산을 했다면 division by zero 에러가 떴을 것이다.</p>
-<h3 id="2-AND-예시"><a href="#2-AND-예시" class="headerlink" title="2. AND 예시"></a>2. <code>AND</code> 예시</h3><h4 id="2-1"><a href="#2-1" class="headerlink" title="2-1."></a>2-1.</h4><p><code>AND</code> 연산자를 사용해 미국 캘리포니아 주에 사는 고객들을 추리시오.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    customername,</span><br><span class="line">    country,</span><br><span class="line">    state</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    country = <span class="string">'USA'</span> <span class="keyword">AND</span> state = <span class="string">'CA'</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+------------------------------+---------+-------+</span><br><span class="line">| customername                 | country | state |</span><br><span class="line">+------------------------------+---------+-------+</span><br><span class="line">| Mini Gifts Distributors Ltd. | USA     | CA    |</span><br><span class="line">| Mini Wheels Co.              | USA     | CA    |</span><br><span class="line">| Technics Stores Inc.         | USA     | CA    |</span><br><span class="line">| Toys4GrownUps.com            | USA     | CA    |</span><br><span class="line">| Boards &amp; Toys Co.            | USA     | CA    |</span><br><span class="line">| Collectable Mini Designs Co. | USA     | CA    |</span><br><span class="line">| Corporate Gift Ideas Co.     | USA     | CA    |</span><br><span class="line">| Men &apos;R&apos; US Retailers, Ltd.   | USA     | CA    |</span><br><span class="line">| The Sharp Gifts Warehouse    | USA     | CA    |</span><br><span class="line">| West Coast Collectables Co.  | USA     | CA    |</span><br><span class="line">| Signal Collectibles Ltd.     | USA     | CA    |</span><br><span class="line">+------------------------------+---------+-------+</span><br><span class="line">11 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h4 id="2-2"><a href="#2-2" class="headerlink" title="2-2."></a>2-2.</h4><p><code>AND</code> 연산자를 사용하면 두 개 이상의 불리언 표현식을 조합할 수 있다. 미국 캘리포니아 주에 살면서, 신용한도가 100K 이상인 고객들을 추리시오.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>   customername,</span><br><span class="line">         country,</span><br><span class="line">         state,</span><br><span class="line">         creditlimit</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> country = <span class="string">'USA'</span></span><br><span class="line">        <span class="keyword">AND</span> state = <span class="string">'CA'</span></span><br><span class="line">        <span class="keyword">AND</span> creditlimit &gt; <span class="number">100000</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+------------------------------+---------+-------+-------------+</span><br><span class="line">| customername                 | country | state | creditlimit |</span><br><span class="line">+------------------------------+---------+-------+-------------+</span><br><span class="line">| Mini Gifts Distributors Ltd. | USA     | CA    |   210500.00 |</span><br><span class="line">| Collectable Mini Designs Co. | USA     | CA    |   105000.00 |</span><br><span class="line">| Corporate Gift Ideas Co.     | USA     | CA    |   105000.00 |</span><br><span class="line">+------------------------------+---------+-------+-------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="1-Natural-Sorting이란"><a href="#1-Natural-Sorting이란" class="headerlink" title="1. Natural Sorting이란"></a>1. Natural Sorting이란</h3><p>데이터를 정렬할 때 사람에겐 다음 순서가 자연스럽다.<br>‘A-1’<br>‘A-2’<br>‘A-3’<br>‘A-4’<br>‘A-5’<br>‘A-10’<br>‘A-11’<br>‘A-20’<br>‘A-30’</p>
+<p>하지만 콤퓨타가 출동하면 어떨까? 콤퓨타라면 아래처럼 정렬해놓고선 잘했다고 여길 수도 있다.<br>‘A-1’<br>‘A-10’<br>‘A-11’<br>‘A-2’<br>‘A-20’<br>‘A-3’<br>‘A-30’<br>‘A-4’<br>‘A-5’</p>
+<p>앞의 예처럼 사람에게 자연스러운 순서로 정렬하는게 바로 Natural Sorting이다. PHP의 경우 <code>natsort()</code> 함수로 간단히 Natural Sorting을 할 수 있지만 MySQL은 얘기가 다르다. <code>ORDER BY</code> 를 활용해 제한적으로만 Natural Sorting이 가능한데 이런 테크닉에 대해서 알아보겠다.</p>
+<p>먼저 <code>id</code> 와 <code>item_no</code> 라는 컬럼이 있는 <code>items</code> 란 테이블을 만든다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> items (</span><br><span class="line">    <span class="keyword">id</span> <span class="built_in">INT</span> AUTO_INCREMENT PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">    item_no <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>다음은 위에서 만든 테이블에 데이터를 추가하겠다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> items(item_no)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="string">'1'</span>),</span><br><span class="line">       (<span class="string">'1C'</span>),</span><br><span class="line">       (<span class="string">'10Z'</span>),</span><br><span class="line">       (<span class="string">'2A'</span>),</span><br><span class="line">       (<span class="string">'2'</span>),</span><br><span class="line">       (<span class="string">'3C'</span>),</span><br><span class="line">       (<span class="string">'20D'</span>);</span><br></pre></td></tr></table></figure>
+<p>위에서 만든 데이터를 <code>item_no</code> 로 정렬해보자.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    item_no</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    items</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> item_no;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------+</span><br><span class="line">| item_no |</span><br><span class="line">+---------+</span><br><span class="line">| 1       |</span><br><span class="line">| 10Z     |</span><br><span class="line">| 1C      |</span><br><span class="line">| 2       |</span><br><span class="line">| 20D     |</span><br><span class="line">| 2A      |</span><br><span class="line">| 3C      |</span><br><span class="line">+---------+</span><br><span class="line">7 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>으으..<br>숫자 부분을 1, 2, 3, 10, 20 순으로 정렬하고 싶을 때 오더바이를 이용하면 그렇게 되지 않는다. 그렇다면 다음과 같은 결과를 얻으려면 어떻게 해야 할까?</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------+</span><br><span class="line">| item_no |</span><br><span class="line">+---------+</span><br><span class="line">| 1       |</span><br><span class="line">| 1C      |</span><br><span class="line">| 2       |</span><br><span class="line">| 2A      |</span><br><span class="line">| 3C      |</span><br><span class="line">| 10Z     |</span><br><span class="line">| 20D     |</span><br><span class="line">+---------+</span><br><span class="line">7 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><code>CAST</code> 함수를 사용해 다음과 같이 쿼리문을 작성하면 원하는 결과를 얻을 수 있다. <code>CAST</code> 함수는 어떤 값을 특정 타입으로 바꿔주는 역할을 한다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    item_no</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    items</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">CAST</span>(item_no <span class="keyword">AS</span> <span class="keyword">UNSIGNED</span>) , item_no;</span><br></pre></td></tr></table></figure>
+<p>또 다른 예를 살펴보자. 먼저 아래 쿼리문으로 데이터를 추가한다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> items;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> items(item_no)</span><br><span class="line"><span class="keyword">VALUES</span>(<span class="string">'A-1'</span>),</span><br><span class="line">      (<span class="string">'A-2'</span>),</span><br><span class="line">      (<span class="string">'A-3'</span>),</span><br><span class="line">      (<span class="string">'A-4'</span>),</span><br><span class="line">      (<span class="string">'A-5'</span>),</span><br><span class="line">      (<span class="string">'A-10'</span>),</span><br><span class="line">      (<span class="string">'A-11'</span>),</span><br><span class="line">      (<span class="string">'A-20'</span>),</span><br><span class="line">      (<span class="string">'A-30'</span>);</span><br></pre></td></tr></table></figure>
+<p>위 데이터를 Natural Sorting 하려면 문자값의 길이를 반환하는 <code>LENGTH</code> 함수를 활용할 수 있다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    item_no</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    items</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">LENGTH</span>(item_no) , item_no;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------+</span><br><span class="line">| item_no |</span><br><span class="line">+---------+</span><br><span class="line">| A-1     |</span><br><span class="line">| A-2     |</span><br><span class="line">| A-3     |</span><br><span class="line">| A-4     |</span><br><span class="line">| A-5     |</span><br><span class="line">| A-10    |</span><br><span class="line">| A-11    |</span><br><span class="line">| A-20    |</span><br><span class="line">| A-30    |</span><br><span class="line">+---------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>좐~~</p>
 
       
     </div>
@@ -255,7 +292,7 @@ var themeMenus = {};
     
 
   
-    <article id="post-MySQL-3-1-데이터-필터링-WHERE" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-MySQL-4-1-데이터-정렬-ORDER-BY" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -263,7 +300,7 @@ var themeMenus = {};
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/12/10/MySQL-3-1-데이터-필터링-WHERE/">[MySQL] 3.1 데이터 필터링 - WHERE</a>
+      <a class="article-title" href="/2018/12/19/MySQL-4-1-데이터-정렬-ORDER-BY/">[MySQL] 4.1 데이터 정렬 - ORDER BY</a>
     </h1>
   
 
@@ -271,8 +308,8 @@ var themeMenus = {};
     
     <div class="article-meta">
       
-	Posted on <a href="/2018/12/10/MySQL-3-1-데이터-필터링-WHERE/" class="article-date">
-	  <time datetime="2018-12-10T09:12:20.000Z" itemprop="datePublished">December 10, 2018</time>
+	Posted on <a href="/2018/12/19/MySQL-4-1-데이터-정렬-ORDER-BY/" class="article-date">
+	  <time datetime="2018-12-18T17:36:53.000Z" itemprop="datePublished">December 19, 2018</time>
 	</a>
 
       
@@ -282,169 +319,188 @@ var themeMenus = {};
         <hr>
 <p><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a> 내용을 따라 익히며 정리한 글입니다. 예시에 나오는 데이터셋은 MySQL 샘플 데이터셋인 <code>classicmodels</code> DB입니다.</p>
 <hr>
-<h3 id="1-WHERE-소개"><a href="#1-WHERE-소개" class="headerlink" title="1. WHERE 소개"></a>1. <code>WHERE</code> 소개</h3><p><code>WHERE</code> 를 사용하면 쿼리에서 반환하는 행에 대한 검색 조건을 지정할 수 있다. 다음과 같이 사용한다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    select_list</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    table_name</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    search_condition;</span><br></pre></td></tr></table></figure>
-<h3 id="2-WHERE-예시"><a href="#2-WHERE-예시" class="headerlink" title="2. WHERE 예시"></a>2. <code>WHERE</code> 예시</h3><p><code>WHERE</code> 절에서는 다음과 같이 비교 연산자를 사용할 수 있다.<br>| 연산자 | 설명|<br>|:—:|:—:|<br>|=|같다|<br>|&lt;&gt; or !=|같지 않다|<br>|&lt;|작다|<br>|&gt;|크다|<br>|&lt;=|작거나 같다|<br>|&gt;=|크거나 같다|</p>
-<h4 id="2-1"><a href="#2-1" class="headerlink" title="2-1."></a>2-1.</h4><p><code>employees</code> 테이블에서 직책이 ‘Sales Rep’인 사람들 추려내시오.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    lastname,</span><br><span class="line">    firstname,</span><br><span class="line">    jobtitle</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    jobtitle = <span class="string">'Sales Rep'</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------+-----------+-----------+</span><br><span class="line">| lastname  | firstname | jobtitle  |</span><br><span class="line">+-----------+-----------+-----------+</span><br><span class="line">| Jennings  | Leslie    | Sales Rep |</span><br><span class="line">| Thompson  | Leslie    | Sales Rep |</span><br><span class="line">| Firrelli  | Julie     | Sales Rep |</span><br><span class="line">| Patterson | Steve     | Sales Rep |</span><br><span class="line">| Tseng     | Foon Yue  | Sales Rep |</span><br><span class="line">| Vanauf    | George    | Sales Rep |</span><br><span class="line">| Bondur    | Loui      | Sales Rep |</span><br><span class="line">| Hernandez | Gerard    | Sales Rep |</span><br><span class="line">| Castillo  | Pamela    | Sales Rep |</span><br><span class="line">| Bott      | Larry     | Sales Rep |</span><br><span class="line">| Jones     | Barry     | Sales Rep |</span><br><span class="line">| Fixter    | Andy      | Sales Rep |</span><br><span class="line">| Marsh     | Peter     | Sales Rep |</span><br><span class="line">| King      | Tom       | Sales Rep |</span><br><span class="line">| Nishi     | Mami      | Sales Rep |</span><br><span class="line">| Kato      | Yoshimi   | Sales Rep |</span><br><span class="line">| Gerard    | Martin    | Sales Rep |</span><br><span class="line">+-----------+-----------+-----------+</span><br><span class="line">17 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h4 id="2-2"><a href="#2-2" class="headerlink" title="2-2."></a>2-2.</h4><p><code>employees</code> 테이블에서 <code>jobtitle</code>이 ‘Sales Rep’이면서 <code>officeCode</code> 가 1인 사람들을 추려내시오.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    lastname,</span><br><span class="line">    firstname,</span><br><span class="line">    jobtitle</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    jobtitle = <span class="string">'Sales Rep'</span> <span class="keyword">AND</span></span><br><span class="line">    officeCode = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----------+-----------+-----------+</span><br><span class="line">| lastname | firstname | jobtitle  |</span><br><span class="line">+----------+-----------+-----------+</span><br><span class="line">| Jennings | Leslie    | Sales Rep |</span><br><span class="line">| Thompson | Leslie    | Sales Rep |</span><br><span class="line">+----------+-----------+-----------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
-<h4 id="2-3"><a href="#2-3" class="headerlink" title="2-3."></a>2-3.</h4><p><code>employees</code> 테이블에서 직책이 ‘Sales Rep’가 아닌 사람들을 추려내시오.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    lastname,</span><br><span class="line">    firstname,</span><br><span class="line">    jobtitle</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    jobtitle &lt;&gt; <span class="string">'Sales Rep'</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------+-----------+----------------------+</span><br><span class="line">| lastname  | firstname | jobtitle             |</span><br><span class="line">+-----------+-----------+----------------------+</span><br><span class="line">| Murphy    | Diane     | President            |</span><br><span class="line">| Patterson | Mary      | VP Sales             |</span><br><span class="line">| Firrelli  | Jeff      | VP Marketing         |</span><br><span class="line">| Patterson | William   | Sales Manager (APAC) |</span><br><span class="line">| Bondur    | Gerard    | Sale Manager (EMEA)  |</span><br><span class="line">| Bow       | Anthony   | Sales Manager (NA)   |</span><br><span class="line">+-----------+-----------+----------------------+</span><br><span class="line">6 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h4 id="2-4"><a href="#2-4" class="headerlink" title="2-4."></a>2-4.</h4><p><code>employees</code> 테이블에서 <code>officeCode</code> 가 5보다 큰 사람들을 추려내시오.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    lastname,</span><br><span class="line">    firstname,</span><br><span class="line">    officeCode</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    employees</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    officecode &gt; <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------+-----------+------------+</span><br><span class="line">| lastname  | firstname | officecode |</span><br><span class="line">+-----------+-----------+------------+</span><br><span class="line">| Patterson | William   | 6          |</span><br><span class="line">| Bott      | Larry     | 7          |</span><br><span class="line">| Jones     | Barry     | 7          |</span><br><span class="line">| Fixter    | Andy      | 6          |</span><br><span class="line">| Marsh     | Peter     | 6          |</span><br><span class="line">| King      | Tom       | 6          |</span><br><span class="line">+-----------+-----------+------------+</span><br><span class="line">6 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
-    <article id="post-MySQL-2-2-데이터-쿼리-SELECT-DISTINCT" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/12/10/MySQL-2-2-데이터-쿼리-SELECT-DISTINCT/">[MySQL] 2.2 데이터 쿼리 - SELECT DISTINCT</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2018/12/10/MySQL-2-2-데이터-쿼리-SELECT-DISTINCT/" class="article-date">
-	  <time datetime="2018-12-10T06:54:46.000Z" itemprop="datePublished">December 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a> 내용을 따라 익히며 정리한 글입니다. 예시에 나오는 데이터셋은 MySQL 샘플 데이터셋인 <code>classicmodels</code> DB입니다.</p>
-<hr>
-<h3 id="1-SELECT-DISTINCT-소개"><a href="#1-SELECT-DISTINCT-소개" class="headerlink" title="1. SELECT DISTINCT 소개"></a>1. <code>SELECT DISTINCT</code> 소개</h3><p>테이블에서 데이터를 뽑아올 때 중복 행이 발생할 수 있다.<br><code>SELECT DISTINCT</code> 문을 사용하면 이러한 중복 행들을 제거할 수 있다.</p>
-<h3 id="2-SELECT-DISTINCT-예시"><a href="#2-SELECT-DISTINCT-예시" class="headerlink" title="2. SELECT DISTINCT 예시"></a>2. <code>SELECT DISTINCT</code> 예시</h3><p><code>employees</code> 테이블에서 종업원들이 어떤 성(姓)을 갖고 있는지 살펴본다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    lastname</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    employees</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> lastname;</span><br></pre></td></tr></table></figure>
-<p>위와 같이 쿼리를 작성하면 아래와 같은 결과가 나온다. Bondur나 Firrelli, Patterson 등 중복된 값들이 있다.<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------+</span><br><span class="line">| lastName  |</span><br><span class="line">+-----------+</span><br><span class="line">| Bondur    |</span><br><span class="line">| Bondur    |</span><br><span class="line">| Bott      |</span><br><span class="line">| Bow       |</span><br><span class="line">| Castillo  |</span><br><span class="line">| Firrelli  |</span><br><span class="line">| Firrelli  |</span><br><span class="line">| Fixter    |</span><br><span class="line">| Gerard    |</span><br><span class="line">| Hernandez |</span><br><span class="line">| Jennings  |</span><br><span class="line">| Jones     |</span><br><span class="line">| Kato      |</span><br><span class="line">| King      |</span><br><span class="line">| Marsh     |</span><br><span class="line">| Murphy    |</span><br><span class="line">| Nishi     |</span><br><span class="line">| Patterson |</span><br><span class="line">| Patterson |</span><br><span class="line">| Patterson |</span><br><span class="line">| Thompson  |</span><br><span class="line">| Tseng     |</span><br><span class="line">| Vanauf    |</span><br><span class="line">+-----------+</span><br><span class="line">23 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<p>이렇게 중복된 값을 보고싶지 않을 때 <code>DISTINCT</code> 절을 사용한다. 결과값이 23개에서 19개로 줄어든 것을 볼 수 있다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span></span><br><span class="line">    lastname</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    employees</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> lastname;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------+</span><br><span class="line">| lastname  |</span><br><span class="line">+-----------+</span><br><span class="line">| Bondur    |</span><br><span class="line">| Bott      |</span><br><span class="line">| Bow       |</span><br><span class="line">| Castillo  |</span><br><span class="line">| Firrelli  |</span><br><span class="line">| Fixter    |</span><br><span class="line">| Gerard    |</span><br><span class="line">| Hernandez |</span><br><span class="line">| Jennings  |</span><br><span class="line">| Jones     |</span><br><span class="line">| Kato      |</span><br><span class="line">| King      |</span><br><span class="line">| Marsh     |</span><br><span class="line">| Murphy    |</span><br><span class="line">| Nishi     |</span><br><span class="line">| Patterson |</span><br><span class="line">| Thompson  |</span><br><span class="line">| Tseng     |</span><br><span class="line">| Vanauf    |</span><br><span class="line">+-----------+</span><br><span class="line">19 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h3 id="3-SELECT-DISTINCT-와-NULL-값"><a href="#3-SELECT-DISTINCT-와-NULL-값" class="headerlink" title="3. SELECT DISTINCT 와 NULL 값"></a>3. <code>SELECT DISTINCT</code> 와 <code>NULL</code> 값</h3><p>열에 <code>NULL</code> 값이 있을 때 <code>DISTINCT</code> 절을 사용하면 MySQL은 <code>NULL</code> 값들을 같은 값으로 하나로 표시한다.</p>
-<p><code>customers</code> 테이블의 <code>state</code> 컬럼에서 아래와 같이 쿼리하면 하나의 <code>NULL</code> 값만 나타난다.<br><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span></span><br><span class="line">    state</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+</span><br><span class="line">| state         |</span><br><span class="line">+---------------+</span><br><span class="line">| NULL          |</span><br><span class="line">| NV            |</span><br><span class="line">| Victoria      |</span><br><span class="line">| CA            |</span><br><span class="line">| NY            |</span><br><span class="line">| PA            |</span><br><span class="line">| CT            |</span><br><span class="line">| MA            |</span><br><span class="line">| Osaka         |</span><br><span class="line">| BC            |</span><br><span class="line">| Québec        |</span><br><span class="line">| Isle of Wight |</span><br><span class="line">| NSW           |</span><br><span class="line">| NJ            |</span><br><span class="line">| Queensland    |</span><br><span class="line">| Co. Cork      |</span><br><span class="line">| Pretoria      |</span><br><span class="line">| NH            |</span><br><span class="line">| Tokyo         |</span><br><span class="line">+---------------+</span><br><span class="line">19 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h3 id="4-복수-열에서의-SELECT-DISTINCT"><a href="#4-복수-열에서의-SELECT-DISTINCT" class="headerlink" title="4. 복수 열에서의 SELECT DISTINCT"></a>4. 복수 열에서의 <code>SELECT DISTINCT</code></h3><p>두 개 이상의 열에서도 <code>DISTINCT</code> 절을 사용할 수 있다. 이 경우 MySQL은 모든 열들의 조합을 사용해 결과값의 유니크함을 결정한다.<br>가령 <code>customers</code> 테이블에 어떤 도시(<code>city</code>)와 주(<code>state</code>)들이 있는지 보려고 하면 아래와 같이 쿼리를 작성한다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span></span><br><span class="line">    state, city</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    state <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> state, city</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+---------------+</span><br><span class="line">| state         | city          |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| BC            | Tsawassen     |</span><br><span class="line">| BC            | Vancouver     |</span><br><span class="line">| CA            | Brisbane      |</span><br><span class="line">| CA            | Burbank       |</span><br><span class="line">| CA            | Burlingame    |</span><br><span class="line">| CA            | Glendale      |</span><br><span class="line">| CA            | Los Angeles   |</span><br><span class="line">| CA            | Pasadena      |</span><br><span class="line">| CA            | San Diego     |</span><br><span class="line">| CA            | San Francisco |</span><br><span class="line">| CA            | San Jose      |</span><br><span class="line">| CA            | San Rafael    |</span><br><span class="line">| Co. Cork      | Cork          |</span><br><span class="line">| CT            | Bridgewater   |</span><br><span class="line">| CT            | Glendale      |</span><br><span class="line">| CT            | New Haven     |</span><br><span class="line">| Isle of Wight | Cowes         |</span><br><span class="line">| MA            | Boston        |</span><br><span class="line">| MA            | Brickhaven    |</span><br><span class="line">| MA            | Cambridge     |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">20 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
-<p><code>DISTINCT</code> 를 사용하지 않으면 중복값이 나타난다. 아래 예에선 San Francisco가 두 번 나온 걸 볼 수 있다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    state, city</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    state <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> state, city</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+---------------+</span><br><span class="line">| state         | city          |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">| BC            | Tsawassen     |</span><br><span class="line">| BC            | Vancouver     |</span><br><span class="line">| CA            | Brisbane      |</span><br><span class="line">| CA            | Burbank       |</span><br><span class="line">| CA            | Burlingame    |</span><br><span class="line">| CA            | Glendale      |</span><br><span class="line">| CA            | Los Angeles   |</span><br><span class="line">| CA            | Pasadena      |</span><br><span class="line">| CA            | San Diego     |</span><br><span class="line">| CA            | San Francisco |</span><br><span class="line">| CA            | San Francisco |</span><br><span class="line">| CA            | San Jose      |</span><br><span class="line">| CA            | San Rafael    |</span><br><span class="line">| Co. Cork      | Cork          |</span><br><span class="line">| CT            | Bridgewater   |</span><br><span class="line">| CT            | Glendale      |</span><br><span class="line">| CT            | New Haven     |</span><br><span class="line">| CT            | New Haven     |</span><br><span class="line">| Isle of Wight | Cowes         |</span><br><span class="line">| MA            | Boston        |</span><br><span class="line">+---------------+---------------+</span><br><span class="line">20 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h3 id="5-DISTINCT-와-GROUP-BY"><a href="#5-DISTINCT-와-GROUP-BY" class="headerlink" title="5. DISTINCT 와 GROUP BY"></a>5. <code>DISTINCT</code> 와 <code>GROUP BY</code></h3><p>집계함수를 사용하지 않은 채로 <code>SELECT</code> 문에서 <code>GROUP BY</code> 절을 사용하면 <code>GROUP BY</code> 절은  <code>DISTINCT</code> 절처럼 작동한다. 어떤 관계가 있는지 아래 세 가지 예시로 살펴본다.</p>
-<h4 id="5-1-GROUP-BY-사용"><a href="#5-1-GROUP-BY-사용" class="headerlink" title="5-1.GROUP BY 사용"></a>5-1.<code>GROUP BY</code> 사용</h4><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    state</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> state</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">10</span>;</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
-<p>+—————+<br>| state         |<br>+—————+<br>| NULL          |<br>| BC            |<br>| CA            |<br>| Co. Cork      |<br>| CT            |<br>| Isle of Wight |<br>| MA            |<br>| NH            |<br>| NJ            |<br>| NSW           |<br>+—————+<br>10 rows in set (0.00 sec)<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 5-2. `DISTINCT` 사용</span><br><span class="line"></span><br><span class="line">`DISTINCT` 절을 사용해 비슷한 결과를 끌어낼 수 있다.</span><br><span class="line">```sql</span><br><span class="line">SELECT DISTINCT</span><br><span class="line">    state</span><br><span class="line">FROM</span><br><span class="line">    customers</span><br><span class="line">LIMIT 10;</span><br><span class="line">```</span><br></pre></td></tr></table></figure></p>
-<p>+———-+<br>| state    |<br>+———-+<br>| NULL     |<br>| NV       |<br>| Victoria |<br>| CA       |<br>| NY       |<br>| PA       |<br>| CT       |<br>| MA       |<br>| Osaka    |<br>| BC       |<br>+———-+<br>10 rows in set (0.00 sec)<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 5-3. `DISTINCT` + `ORDER BY` 사용</span><br><span class="line"></span><br><span class="line">`DISTINCT` 를 사용한 5-2 예시에 `ORDER BY` 를 추가하면 5-1과 똑같은 결과가 나온다.</span><br><span class="line"></span><br><span class="line">```sql</span><br><span class="line">SELECT DISTINCT</span><br><span class="line">    state</span><br><span class="line">FROM</span><br><span class="line">    customers</span><br><span class="line">ORDER BY state</span><br><span class="line">LIMIT 10;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+</span><br><span class="line">| state         |</span><br><span class="line">+---------------+</span><br><span class="line">| NULL          |</span><br><span class="line">| BC            |</span><br><span class="line">| CA            |</span><br><span class="line">| Co. Cork      |</span><br><span class="line">| CT            |</span><br><span class="line">| Isle of Wight |</span><br><span class="line">| MA            |</span><br><span class="line">| NH            |</span><br><span class="line">| NJ            |</span><br><span class="line">| NSW           |</span><br><span class="line">+---------------+</span><br><span class="line">10 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<p>위 예시에서 보듯 <code>DISTINCT</code> 는  <code>GROUP BY</code> 의 특수한 경우라고 할 수 있다.<br><code>DISTINCT</code> 는 결과셋를 따로 정렬하지 않지만<code>GROUP BY</code> 는 결과셋을 정렬해서 리턴한다는 차이가 있다.</p>
-<h3 id="6-DISTINCT-와-집계-함수"><a href="#6-DISTINCT-와-집계-함수" class="headerlink" title="6. DISTINCT 와 집계 함수"></a>6. <code>DISTINCT</code> 와 집계 함수</h3><p><code>DISTINCT</code> 는 결과값에 <code>SUM</code>, <code>AVG</code>, <code>COUNT</code> 같은 집계 함수를 적용하기 전에 중복값을 제거하는데 사용되기도 한다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    <span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> state)</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    country = <span class="string">'USA'</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------------------+</span><br><span class="line">| count(distinct state) |</span><br><span class="line">+-----------------------+</span><br><span class="line">|                     8 |</span><br><span class="line">+-----------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
-<h3 id="7-DISTINCT-와-LIMIT"><a href="#7-DISTINCT-와-LIMIT" class="headerlink" title="7. DISTINCT 와 LIMIT"></a>7. <code>DISTINCT</code> 와 <code>LIMIT</code></h3><p><code>DISTINCT</code> 를 <code>LIMIT</code> 와 함께 쓰면 <code>LIMIT</code> 로 제한한 수만큼 특정 행 값을 찾았을 때 탐색을 바로 중단한다.<br><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span></span><br><span class="line">    state</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    state <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----------+</span><br><span class="line">| state    |</span><br><span class="line">+----------+</span><br><span class="line">| NV       |</span><br><span class="line">| Victoria |</span><br><span class="line">| CA       |</span><br><span class="line">| NY       |</span><br><span class="line">| PA       |</span><br><span class="line">+----------+</span><br><span class="line">5 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
-    <article id="post-MySQL-2-1-데이터-쿼리-SELECT" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2018/12/10/MySQL-2-1-데이터-쿼리-SELECT/">[MySQL] 2.1 데이터 쿼리 - SELECT</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2018/12/10/MySQL-2-1-데이터-쿼리-SELECT/" class="article-date">
-	  <time datetime="2018-12-10T06:47:06.000Z" itemprop="datePublished">December 10, 2018</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a> 내용을 따라 익히며 정리한 글입니다. 예시에 나오는 데이터셋은 MySQL 샘플 데이터셋인 <code>classicmodels</code> DB입니다.</p>
-<hr>
-<h3 id="1-SELECT-소개"><a href="#1-SELECT-소개" class="headerlink" title="1. SELECT 소개"></a>1. <code>SELECT</code> 소개</h3><p>수많은 열과 행으로 이루어진 테이블에서 특정 열(또는 행)만 보고 싶을 때 <code>SELECT</code> 문을 사용한다.</p>
-<p><code>SELECT</code> 문은 아래와 같이 쓸 수 있다.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    column_1, column_2, ...</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    table_1</span><br><span class="line">[<span class="keyword">INNER</span> | <span class="keyword">LEFT</span> |<span class="keyword">RIGHT</span>] <span class="keyword">JOIN</span> table_2 <span class="keyword">ON</span> conditions</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    conditions</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> column_1</span><br><span class="line"><span class="keyword">HAVING</span> group_conditions</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> column_1</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="keyword">offset</span>, <span class="keyword">length</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="1-ORDER-BY-소개"><a href="#1-ORDER-BY-소개" class="headerlink" title="1. ORDER BY 소개"></a>1. <code>ORDER BY</code> 소개</h3><p><code>SELECT</code> 문을 사용할 때 결과셋은 따로 정렬되지 않는데, <code>ORDER BY</code> 절을 사용해 정렬할 수 있다.</p>
+<h3 id="2-ORDER-BY-예시"><a href="#2-ORDER-BY-예시" class="headerlink" title="2. ORDER BY 예시"></a>2. <code>ORDER BY</code> 예시</h3><p>다음 쿼리는  <code>customers</code> 테이블에서 성과 이름을 가져온 뒤 성을 기준으로 정렬해 보여준다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> contactLastname,</span><br><span class="line"> contactFirstname</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"> contactLastname</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------------+------------------+</span><br><span class="line">| contactLastname | contactFirstname |</span><br><span class="line">+-----------------+------------------+</span><br><span class="line">| Accorti         | Paolo            |</span><br><span class="line">| Altagar,G M     | Raanan           |</span><br><span class="line">| Andersen        | Mel              |</span><br><span class="line">| Anton           | Carmen           |</span><br><span class="line">| Ashworth        | Rachel           |</span><br><span class="line">+-----------------+------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>내림차순으로 정렬하려면 <code>DESC</code> 를 추가해준다.<br>따로 표시하지 않거나 <code>ASC</code> 을 써주면 오름차순 정렬이 실행된다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> contactLastname,</span><br><span class="line"> contactFirstname</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"> contactLastname <span class="keyword">DESC</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------------+------------------+</span><br><span class="line">| contactLastname | contactFirstname |</span><br><span class="line">+-----------------+------------------+</span><br><span class="line">| Young           | Julie            |</span><br><span class="line">| Young           | Jeff             |</span><br><span class="line">| Young           | Mary             |</span><br><span class="line">| Young           | Dorothy          |</span><br><span class="line">| Yoshido         | Juri             |</span><br><span class="line">+-----------------+------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>성은 내림차순으로, 이름은 오름차순으로 정렬하고 싶다면 각각의 컬럼에 <code>DESC</code> 와 <code>ASC</code> 를 명시해주면 된다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> contactLastname,</span><br><span class="line"> contactFirstname</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"> contactLastname <span class="keyword">DESC</span>,</span><br><span class="line"> contactFirstname <span class="keyword">ASC</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------------+------------------+</span><br><span class="line">| contactLastname | contactFirstname |</span><br><span class="line">+-----------------+------------------+</span><br><span class="line">| Young           | Dorothy          |</span><br><span class="line">| Young           | Jeff             |</span><br><span class="line">| Young           | Julie            |</span><br><span class="line">| Young           | Mary             |</span><br><span class="line">| Yoshido         | Juri             |</span><br><span class="line">+-----------------+------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="3-표현식에-기반한-ORDER-BY-정렬"><a href="#3-표현식에-기반한-ORDER-BY-정렬" class="headerlink" title="3. 표현식에 기반한 ORDER BY 정렬"></a>3. 표현식에 기반한 <code>ORDER BY</code> 정렬</h3><p>다음 쿼리는 <code>orderdetails</code> 테이블에서 주문번호와 주문라인번호, 주문수량과 단가의 곱을 불러온다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> ordernumber,</span><br><span class="line"> orderlinenumber,</span><br><span class="line"> quantityOrdered * priceEach <span class="keyword">AS</span> subtotal</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> orderdetails</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"> ordernumber,</span><br><span class="line"> orderLineNumber,</span><br><span class="line"> subtotal</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-------------+-----------------+----------+</span><br><span class="line">| ordernumber | orderlinenumber | subtotal |</span><br><span class="line">+-------------+-----------------+----------+</span><br><span class="line">|       10100 |               1 |  1729.21 |</span><br><span class="line">|       10100 |               2 |  2754.50 |</span><br><span class="line">|       10100 |               3 |  4080.00 |</span><br><span class="line">|       10100 |               4 |  1660.12 |</span><br><span class="line">|       10101 |               1 |  4343.56 |</span><br><span class="line">+-------------+-----------------+----------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="4-ORDER-BY-와-커스텀-정렬"><a href="#4-ORDER-BY-와-커스텀-정렬" class="headerlink" title="4. ORDER BY 와 커스텀 정렬"></a>4. <code>ORDER BY</code> 와 커스텀 정렬</h3><p><code>ORDER BY</code> 를 이용하면 <code>FIELD()</code> 함수를 이용해 커스텀 정렬을 정의할 수 있다. 다음 순서대로 정렬을 해야한다고 가정하자.</p>
 <ul>
-<li><code>SELECT</code> : 가져오고 싶은 열을 콤마(<code>,</code>)로 구분해 입력. 모든 열을 가져오려면 <code>*</code></li>
-<li><code>FROM</code> : 데이터를 쿼리하려는 테이블이나 뷰(일종의 가상 테이블)의 이름을 입력</li>
-<li><code>JOIN</code> : 여러 테이블에서 연관된 데이터를 조건에 맞게 가져오기</li>
-<li><code>WHERE</code> : 특정 조건에 따라 행을 필터링</li>
-<li><code>GROUP BY</code> : 행들을 특정 그룹으로 묶어 집계</li>
-<li><code>HAVING</code> : <code>GROUP BY</code> 로 정의된 그룹에 기초해 그룹을 필터링</li>
-<li><code>ORDER BY</code> : 오름차순 내림차순 설정</li>
-<li><code>LIMIT</code> : 출력하는 행 수를 제한</li>
+<li>In Process</li>
+<li>On Hold</li>
+<li>Cancelled</li>
+<li>Resolved</li>
+<li>Disputed</li>
+<li>Shipped</li>
 </ul>
-<h3 id="2-SELECT-예시"><a href="#2-SELECT-예시" class="headerlink" title="2. SELECT 예시"></a>2. <code>SELECT</code> 예시</h3><h4 id="2-1"><a href="#2-1" class="headerlink" title="2-1."></a>2-1.</h4><p><code>employees</code> 테이블에서 <code>lastName</code>, <code>firstName</code>, <code>jobTitle</code> 열만 나타내는 쿼리를 작성하라.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    lastname, firstname, jobtitle</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    employees;</span><br></pre></td></tr></table></figure>
-<h4 id="2-2"><a href="#2-2" class="headerlink" title="2-2."></a>2-2.</h4><p><code>employees</code> 테이블에서 모든 열의 데이터를 가져오는 쿼리를 작성하라.</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> employees;</span><br></pre></td></tr></table></figure>
+<p>이 경우 쿼리문은 다음과 같이 작성한다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    orderNumber, <span class="keyword">status</span></span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    orders</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">FIELD</span>(<span class="keyword">status</span>,</span><br><span class="line">        <span class="string">'In Process'</span>,</span><br><span class="line">        <span class="string">'On Hold'</span>,</span><br><span class="line">        <span class="string">'Cancelled'</span>,</span><br><span class="line">        <span class="string">'Resolved'</span>,</span><br><span class="line">        <span class="string">'Disputed'</span>,</span><br><span class="line">        <span class="string">'Shipped'</span>)</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-------------+------------+</span><br><span class="line">| orderNumber | status     |</span><br><span class="line">+-------------+------------+</span><br><span class="line">|       10425 | In Process |</span><br><span class="line">|       10421 | In Process |</span><br><span class="line">|       10422 | In Process |</span><br><span class="line">|       10420 | In Process |</span><br><span class="line">|       10424 | In Process |</span><br><span class="line">|       10423 | In Process |</span><br><span class="line">|       10414 | On Hold    |</span><br><span class="line">|       10401 | On Hold    |</span><br><span class="line">|       10334 | On Hold    |</span><br><span class="line">|       10407 | On Hold    |</span><br><span class="line">+-------------+------------+</span><br><span class="line">10 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-MySQL-3-8-데이터-필터링-IS-NULL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/12/11/MySQL-3-8-데이터-필터링-IS-NULL/">[MySQL] 3.8 데이터 필터링 - IS NULL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2018/12/11/MySQL-3-8-데이터-필터링-IS-NULL/" class="article-date">
+	  <time datetime="2018-12-10T23:53:27.000Z" itemprop="datePublished">December 11, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a> 내용을 따라 익히며 정리한 글입니다. 예시에 나오는 데이터셋은 MySQL 샘플 데이터셋인 <code>classicmodels</code> DB입니다.</p>
+<hr>
+<h3 id="1-IS-NULL-소개"><a href="#1-IS-NULL-소개" class="headerlink" title="1. IS NULL 소개"></a>1. <code>IS NULL</code> 소개</h3><p>값이 <code>NULL</code> 인지 테스트 하려면 다음과 같이 <code>IS NULL</code> 을 사용한다</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">value IS NULL</span><br></pre></td></tr></table></figure>
+<p>값이 <code>NULL</code> 이면 <code>TRUE</code> 를, 아니면 <code>FALSE</code> 를 리턴한다.</p>
+<p>MySQL에는 불리언 타입이 내장되어 있지 않다. 대신 <code>TINYINT(1)</code> 를 써서 <code>참트루</code> 일 경우 1, <code>FALSE</code> 면 0으로 표시한다.</p>
+<p><code>IS NULL</code> 은 비교연산자이기 때문에 <code>SELECT</code> 나 <code>WHERE</code> 절에서 쓸 수 있다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="number">1</span> <span class="keyword">IS</span> <span class="literal">NULL</span>,</span><br><span class="line">       <span class="number">0</span> <span class="keyword">IS</span> <span class="literal">NULL</span>,  </span><br><span class="line">       <span class="literal">NULL</span> <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-----------+-----------+--------------+</span><br><span class="line">| 1 IS NULL | 0 IS NULL | NULL IS NULL |</span><br><span class="line">+-----------+-----------+--------------+</span><br><span class="line">|         0 |         0 |            1 |</span><br><span class="line">+-----------+-----------+--------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>값이 <code>NULL</code> 이 아닌지 확인하고 싶다면 하려면 <code>IS NOT NULL</code> 을 사용한다</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">value IS NOT NULL</span><br></pre></td></tr></table></figure>
+<p>값이 <code>NULL</code> 이 아니면 <code>TRUE(1)</code> 를, 값이 <code>NULL</code> 이면 <code>FALSE(0)</code> 을 리턴한다<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT 1 IS NOT NULL,</span><br><span class="line">       0 IS NOT NULL,</span><br><span class="line">       NULL IS NOT NULL;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------+---------------+------------------+</span><br><span class="line">| 1 IS NOT NULL | 0 IS NOT NULL | NULL IS NOT NULL |</span><br><span class="line">+---------------+---------------+------------------+</span><br><span class="line">|             1 |             1 |                0 |</span><br><span class="line">+---------------+---------------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="2-IS-NULL-예시"><a href="#2-IS-NULL-예시" class="headerlink" title="2. IS NULL 예시"></a>2. <code>IS NULL</code> 예시</h3><p><code>customers</code> 테이블에서 <code>salesrepemployeenumber</code> 가 없는 데이터들의 고객명, 국가, <code>salesrepemployeenumber</code> 을 가져와 보겠다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    customerName,</span><br><span class="line">    country,</span><br><span class="line">    salesrepemployeenumber</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    salesrepemployeenumber <span class="keyword">IS</span> <span class="literal">NULL</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> customerName</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----------------------------+-------------+------------------------+</span><br><span class="line">| customerName               | country     | salesrepemployeenumber |</span><br><span class="line">+----------------------------+-------------+------------------------+</span><br><span class="line">| ANG Resellers              | Spain       |                   NULL |</span><br><span class="line">| Anton Designs, Ltd.        | Spain       |                   NULL |</span><br><span class="line">| Asian Shopping Network, Co | Singapore   |                   NULL |</span><br><span class="line">| Asian Treasures, Inc.      | Ireland     |                   NULL |</span><br><span class="line">| BG&amp;E Collectables          | Switzerland |                   NULL |</span><br><span class="line">+----------------------------+-------------+------------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><code>salesrepemployeenumber</code> 가 있는 데이터들을 가져오려면 <code>IS NULL</code> 대신 <code>IS NOT NULL</code> 을 써준다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    customerName,</span><br><span class="line">    country,</span><br><span class="line">    salesrepemployeenumber</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    salesrepemployeenumber <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> customerName</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+-------------------------+-----------+------------------------+</span><br><span class="line">| customerName            | country   | salesrepemployeenumber |</span><br><span class="line">+-------------------------+-----------+------------------------+</span><br><span class="line">| Alpha Cognac            | France    |                   1370 |</span><br><span class="line">| American Souvenirs Inc  | USA       |                   1286 |</span><br><span class="line">| Amica Models &amp; Co.      | Italy     |                   1401 |</span><br><span class="line">| Anna&apos;s Decorations, Ltd | Australia |                   1611 |</span><br><span class="line">| Atelier graphique       | France    |                   1370 |</span><br><span class="line">+-------------------------+-----------+------------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="3-IS-NULL-최적화"><a href="#3-IS-NULL-최적화" class="headerlink" title="3. IS NULL 최적화"></a>3. <code>IS NULL</code> 최적화</h3><p><code>IS NULL</code> 은 연산자 <code>=</code> 과 같은 방식으로 최적화를 수행한다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    customerNumber,</span><br><span class="line">    salesRepEmployeeNumber</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    salesRepEmployeeNumber <span class="keyword">IS</span> <span class="literal">NULL</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----------------+------------------------+</span><br><span class="line">| customerNumber | salesRepEmployeeNumber |</span><br><span class="line">+----------------+------------------------+</span><br><span class="line">|            125 |                   NULL |</span><br><span class="line">|            169 |                   NULL |</span><br><span class="line">|            206 |                   NULL |</span><br><span class="line">|            223 |                   NULL |</span><br><span class="line">|            237 |                   NULL |</span><br><span class="line">+----------------+------------------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>다음은 쿼리의 <code>EXPLAIN</code> 이다.<br><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span></span><br><span class="line">    customerNumber,</span><br><span class="line">    salesRepEmployeeNumber</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    salesRepEmployeeNumber <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-----------+------------+------+------------------------+------------------------+---------+-------+------+----------+--------------------------+</span><br><span class="line">| id | select_type | table     | partitions | type | possible_keys          | key                    | key_len | ref   | rows | filtered | Extra                    |</span><br><span class="line">+----+-------------+-----------+------------+------+------------------------+------------------------+---------+-------+------+----------+--------------------------+</span><br><span class="line">|  1 | SIMPLE      | customers | NULL       | ref  | salesRepEmployeeNumber | salesRepEmployeeNumber | 5       | const |   22 |   100.00 | Using where; Using index |</span><br><span class="line">+----+-------------+-----------+------------+------+------------------------+------------------------+---------+-------+------+----------+--------------------------+</span><br><span class="line">1 row in set, 1 warning (0.01 sec)</span><br></pre></td></tr></table></figure>
+<p>MySQL은 <code>col = value OR col IS NULL</code> 조합도 최적화할 수 있다. 다음의 예를 보면, 최적화가 적용됐을 경우 <code>EXPLAIN</code> 에서 <code>ref_or_null</code> 을 볼 수 있다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span></span><br><span class="line">    customerNumber,</span><br><span class="line">    salesRepEmployeeNumber</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    customers</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    salesRepEmployeeNumber = <span class="number">1370</span> <span class="keyword">OR</span></span><br><span class="line">    salesRepEmployeeNumber <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----+-------------+-----------+------------+-------------+------------------------+------------------------+---------+-------+------+----------+--------------------------+</span><br><span class="line">| id | select_type | table     | partitions | type        | possible_keys          | key                    | key_len | ref   | rows | filtered | Extra                    |</span><br><span class="line">+----+-------------+-----------+------------+-------------+------------------------+------------------------+---------+-------+------+----------+--------------------------+</span><br><span class="line">|  1 | SIMPLE      | customers | NULL       | ref_or_null | salesRepEmployeeNumber | salesRepEmployeeNumber | 5       | const |   29 |   100.00 | Using where; Using index |</span><br><span class="line">+----+-------------+-----------+------------+-------------+------------------------+------------------------+---------+-------+------+----------+--------------------------+</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-MySQL-3-7-데이터-필터링-LIMIT" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/12/11/MySQL-3-7-데이터-필터링-LIMIT/">[MySQL] 3.7 데이터 필터링 - LIMIT</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2018/12/11/MySQL-3-7-데이터-필터링-LIMIT/" class="article-date">
+	  <time datetime="2018-12-10T23:16:33.000Z" itemprop="datePublished">December 11, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a> 내용을 따라 익히며 정리한 글입니다. 예시에 나오는 데이터셋은 MySQL 샘플 데이터셋인 <code>classicmodels</code> DB입니다.</p>
+<hr>
+<h3 id="1-LIMIT-소개"><a href="#1-LIMIT-소개" class="headerlink" title="1. LIMIT 소개"></a>1. <code>LIMIT</code> 소개</h3><p><code>LIMIT</code> 는 <code>SELECT</code> 문에서 결과값 수를 제한할 때 사용한다.<br>하나 혹은 두 개의 아규먼트를 받는다. 아규먼트는 0 또는 양의 정수여야 한다. 다음과 같이 사용한다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    column1,column2,...</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">    <span class="keyword">table</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="keyword">offset</span> , <span class="keyword">count</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>offset</code> : 리턴하기 시작할 행 넘버를 지정한다. (첫 행이 0번이다)</li>
+<li><code>count</code> : 리턴할 행의 수를 지정한다</li>
+</ul>
+<h3 id="2-LIMIT-로-N번째-행까지-가져오기"><a href="#2-LIMIT-로-N번째-행까지-가져오기" class="headerlink" title="2. LIMIT 로 N번째 행까지 가져오기"></a>2. <code>LIMIT</code> 로 N번째 행까지 가져오기</h3><p><code>customers</code> 테이블에서 5번째 행까지의 고객번호, 고객명, 신용한도를 가져와보자.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> customernumber,</span><br><span class="line"> customername,</span><br><span class="line"> creditlimit</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> customers</span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----------------+----------------------------+-------------+</span><br><span class="line">| customernumber | customername               | creditlimit |</span><br><span class="line">+----------------+----------------------------+-------------+</span><br><span class="line">|            103 | Atelier graphique          |    21000.00 |</span><br><span class="line">|            112 | Signal Gift Stores         |    71800.00 |</span><br><span class="line">|            114 | Australian Collectors, Co. |   117300.00 |</span><br><span class="line">|            119 | La Rochelle Gifts          |   118200.00 |</span><br><span class="line">|            121 | Baane Mini Imports         |    81700.00 |</span><br><span class="line">+----------------+----------------------------+-------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><code>offset</code> 아규먼트에 0을 넣는 것과 아무것도 넣지 않는 것은 같다. 즉, <code>LIMIT 5</code> 은 <code>LIMIT 0, 5</code> 과 같은 결과를 리턴한다.</p>
+<h3 id="3-LIMIT-로-상위값들-하위값들-가져오기"><a href="#3-LIMIT-로-상위값들-하위값들-가져오기" class="headerlink" title="3. LIMIT 로 상위값들, 하위값들 가져오기"></a>3. <code>LIMIT</code> 로 상위값들, 하위값들 가져오기</h3><p><code>LIMIT</code> 는 <code>ORDER BY</code> 와 같이 자주 쓰인다.</p>
+<p><code>customers</code> 테이블에서 신용한도 상위 5명의 고객번호, 고객명, 신용한도를 내림차순으로 가져오려면 다음과 같이 작성한다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> customernumber,</span><br><span class="line"> customername,</span><br><span class="line"> creditlimit</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"> creditlimit <span class="keyword">DESC</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----------------+------------------------------+-------------+</span><br><span class="line">| customernumber | customername                 | creditlimit |</span><br><span class="line">+----------------+------------------------------+-------------+</span><br><span class="line">|            141 | Euro+ Shopping Channel       |   227600.00 |</span><br><span class="line">|            124 | Mini Gifts Distributors Ltd. |   210500.00 |</span><br><span class="line">|            298 | Vida Sport, Ltd              |   141300.00 |</span><br><span class="line">|            151 | Muscle Machine Inc           |   138500.00 |</span><br><span class="line">|            187 | AV Stores, Co.               |   136800.00 |</span><br><span class="line">+----------------+------------------------------+-------------+</span><br><span class="line">5 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>하위 5명을 오름차순으로 가져오려면 <code>DESC</code> 대신 <code>ASC</code> 을 사용해 다음과 같이 작성한다.</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> customernumber,</span><br><span class="line"> customername,</span><br><span class="line"> creditlimit</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"> creditlimit <span class="keyword">ASC</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+----------------+----------------------------+-------------+</span><br><span class="line">| customernumber | customername               | creditlimit |</span><br><span class="line">+----------------+----------------------------+-------------+</span><br><span class="line">|            223 | Natürlich Autos            |        0.00 |</span><br><span class="line">|            168 | American Souvenirs Inc     |        0.00 |</span><br><span class="line">|            169 | Porto Imports Co.          |        0.00 |</span><br><span class="line">|            206 | Asian Shopping Network, Co |        0.00 |</span><br><span class="line">|            125 | Havel &amp; Zbyszek Co         |        0.00 |</span><br><span class="line">+----------------+----------------------------+-------------+</span><br><span class="line">5 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="4-LIMIT-로-상위-N번째-값-가져오기"><a href="#4-LIMIT-로-상위-N번째-값-가져오기" class="headerlink" title="4. LIMIT 로 상위 N번째 값 가져오기"></a>4. <code>LIMIT</code> 로 상위 N번째 값 가져오기</h3><p>상품 중 가장 비싸거나 가장 싼 상품을 찾으려면 <code>MAX</code> 나 <code>MIN</code> 등을 사용할 수 있다. 하지만 세 번째로 비싼 상품을 찾으려면?</p>
+<ol>
+<li>먼저 결과값을 내림차순으로 정렬해보자.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> productName,</span><br><span class="line"> buyprice</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"> buyprice <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+---------------------------------------------+----------+</span><br><span class="line">| productName                                 | buyprice |</span><br><span class="line">+---------------------------------------------+----------+</span><br><span class="line">| 1962 LanciaA Delta 16V                      |   103.42 |</span><br><span class="line">| 1998 Chrysler Plymouth Prowler              |   101.51 |</span><br><span class="line">| 1952 Alpine Renault 1300                    |    98.58 |</span><br><span class="line">| 1956 Porsche 356A Coupe                     |    98.30 |</span><br><span class="line">| 2001 Ferrari Enzo                           |    95.59 |</span><br><span class="line">| 1968 Ford Mustang                           |    95.34 |</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>가져와야 할 값은 Alpine Renault 1300 이다. 위 쿼리에 <code>LIMIT 2, 1</code> 을 추가하면 아래처럼 ‘2번행(첫 줄이 0번행)부터 1개 행을 리턴’한다.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"> productName,</span><br><span class="line"> buyprice</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line"> products</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span></span><br><span class="line"> buyprice <span class="keyword">DESC</span></span><br><span class="line"><span class="keyword">LIMIT</span> <span class="number">2</span>, <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+--------------------------+----------+</span><br><span class="line">| productName              | buyprice |</span><br><span class="line">+--------------------------+----------+</span><br><span class="line">| 1952 Alpine Renault 1300 |    98.58 |</span><br><span class="line">+--------------------------+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -474,7 +530,7 @@ var themeMenus = {};
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/">Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next</a>
   </nav>
 
 </section>
@@ -586,8 +642,8 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/01/12/MySQL-5-테이블-합치기/">[MySQL] 5.테이블 합치기</a></h6>
-              <span>January 12, 2019</span>
+              <h6 style="margin: 0;"><a href="/2019/02/15/Deep-Learning-with-Python-Ch-05/">Deep Learning with Python - Ch.05</a></h6>
+              <span>February 15, 2019</span>
             </div>
 
           </li>
@@ -598,8 +654,8 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/01/11/NoSQL-Redis/">[NoSQL] Redis</a></h6>
-              <span>January 11, 2019</span>
+              <h6 style="margin: 0;"><a href="/2019/02/14/Deep-Learning-with-Python-Ch-04/">Deep Learning with Python - Ch.04</a></h6>
+              <span>February 14, 2019</span>
             </div>
 
           </li>
@@ -610,8 +666,8 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/01/08/Python-위치-인자-모으기-arg-와-키워드-인자-모으기-kwargs/">[Python] 위치 인자 모으기(*arg)와 키워드 인자 모으기(**kwargs)</a></h6>
-              <span>January 8, 2019</span>
+              <h6 style="margin: 0;"><a href="/2019/02/06/Deep-Learning-with-Python-Ch-03/">Deep Learning with Python - Ch.03</a></h6>
+              <span>February 6, 2019</span>
             </div>
 
           </li>
@@ -622,8 +678,8 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/01/03/Hexo-YouTube-영상-넣기/">[Hexo] YouTube 영상 넣기</a></h6>
-              <span>January 3, 2019</span>
+              <h6 style="margin: 0;"><a href="/2019/01/28/Deep-Learning-with-Python-Ch-02/">Deep Learning with Python - Ch.02</a></h6>
+              <span>January 28, 2019</span>
             </div>
 
           </li>
@@ -634,8 +690,8 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2018/12/31/Python-Comprehension/">[Python] Comprehension</a></h6>
-              <span>December 31, 2018</span>
+              <h6 style="margin: 0;"><a href="/2019/01/28/Deep-Learning-with-Python-Ch-01/">Deep Learning with Python - Ch.01</a></h6>
+              <span>January 28, 2019</span>
             </div>
 
           </li>
@@ -649,7 +705,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NoSQL/">NoSQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">4</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DSBooks/">DSBooks</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NoSQL/">NoSQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/crawling/">crawling</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/datascienceschool/">datascienceschool</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -659,7 +715,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL-Redis/">NoSQL, Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras-Deep-Learning-with-Python/">Keras, Deep Learning with Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL-Redis/">NoSQL, Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawling/">crawling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastcampus-Dr-Kim-datascienceschool/">fastcampus, Dr.Kim, datascienceschool</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/패턴-인식과-머신-러닝-비숍/">패턴 인식과 머신 러닝, 비숍</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -669,7 +725,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NoSQL-Redis/" style="font-size: 10px;">NoSQL, Redis</a> <a href="/tags/python/" style="font-size: 15px;">python</a>
+      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Keras-Deep-Learning-with-Python/" style="font-size: 17.5px;">Keras, Deep Learning with Python</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/NoSQL-Redis/" style="font-size: 10px;">NoSQL, Redis</a> <a href="/tags/crawling/" style="font-size: 10px;">crawling</a> <a href="/tags/fastcampus-Dr-Kim-datascienceschool/" style="font-size: 12.5px;">fastcampus, Dr.Kim, datascienceschool</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/패턴-인식과-머신-러닝-비숍/" style="font-size: 10px;">패턴 인식과 머신 러닝, 비숍</a>
     </div>
   </div>
 
@@ -679,7 +735,7 @@ var themeMenus = {};
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">14</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">15</span></li></ul>
     </div>
   </div>
 
