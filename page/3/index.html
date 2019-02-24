@@ -161,74 +161,6 @@ var themeMenus = {};
         
           <section id="main">
   
-    <article id="post-MySQL-5-테이블-합치기" class="article article-type-post" itemscope itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2019/01/12/MySQL-5-테이블-합치기/">[MySQL] 5.테이블 합치기</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2019/01/12/MySQL-5-테이블-합치기/" class="article-date">
-	  <time datetime="2019-01-11T16:08:18.000Z" itemprop="datePublished">January 12, 2019</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p><a href="http://www.mysqltutorial.org" target="_blank" rel="noopener">http://www.mysqltutorial.org</a> 내용을 따라 익히며 정리한 글입니다.</p>
-<hr>
-<h3 id="5-1-MySQL-alias"><a href="#5-1-MySQL-alias" class="headerlink" title="5.1 MySQL alias"></a>5.1 MySQL alias</h3><p>컬럼 alias와 테이블 alias를 두 가지가 있습니다. 먼저 컬럼 alias부터 살펴보겠습니다.</p>
-<h4 id="5-1-1-MySQL-alias-for-columns"><a href="#5-1-1-MySQL-alias-for-columns" class="headerlink" title="5.1.1 MySQL alias for columns"></a>5.1.1 MySQL alias for columns</h4><p>가끔 컬럼 이름들이 너무 테크니컬해서 이해하기 힘들 때가 있는데 이해하기 쉬운 별칭(alias)을 지정해줄 수 있습니다.<br>** AS 는 써도 되고 안 써도 됩니다.</p>
-<ul>
-<li>예시1) 가명을 안 쓴 경우</li>
-<li>예시2) 가명을 쓴 경우</li>
-</ul>
-<p>부여한 alias를 이용해 오더바이나 그룹바이, 해빙 절을 쓸 수도 있습니다.</p>
-<ul>
-<li>예시3) alias로 오더바이를 쓴 경우</li>
-</ul>
-<h4 id="5-1-2-MySQL-alias-for-tables"><a href="#5-1-2-MySQL-alias-for-tables" class="headerlink" title="5.1.2 MySQL alias for tables"></a>5.1.2 MySQL alias for tables</h4><p>위에서 컬럼에 했던 것처럼 테이블에도 다른 이름을 부여할 수 있습니다. 역시 AS는 optional입니다.<br>테이블 alias는 이너조인 레프트조인, 셀프조인을 쓴 구문에서 자주 쓰입니다. 서브쿼리에서도요.</p>
-<p><code>customers</code>과 <code>orders</code> 테이블에는 <code>customerNumber</code> 라는 컬럼이 공통적으로 들어가 있습니다.</p>
-<ul>
-<li>예시4) 에러를 피하기 위한 예</li>
-<li>예시5)</li>
-</ul>
-<h3 id="5-2-MySQL-join"><a href="#5-2-MySQL-join" class="headerlink" title="5.2 MySQL join"></a>5.2 MySQL join</h3><h4 id="Introduction-to-MySQL-join-statements"><a href="#Introduction-to-MySQL-join-statements" class="headerlink" title="Introduction to MySQL join statements"></a>Introduction to MySQL join statements</h4><h4 id="MySQL-CROSS-JOIN"><a href="#MySQL-CROSS-JOIN" class="headerlink" title="MySQL CROSS JOIN"></a>MySQL CROSS JOIN</h4><h4 id="MySQL-INNER-JOIN"><a href="#MySQL-INNER-JOIN" class="headerlink" title="MySQL INNER JOIN"></a>MySQL INNER JOIN</h4><h4 id="MySQL-LEFT-JOIN"><a href="#MySQL-LEFT-JOIN" class="headerlink" title="MySQL LEFT JOIN"></a>MySQL LEFT JOIN</h4><h4 id="MySQL-RIGHT-JOIN"><a href="#MySQL-RIGHT-JOIN" class="headerlink" title="MySQL RIGHT JOIN"></a>MySQL RIGHT JOIN</h4><h3 id="5-3-INNER-JOIN"><a href="#5-3-INNER-JOIN" class="headerlink" title="5.3 INNER JOIN"></a>5.3 INNER JOIN</h3><h4 id="Introducing-MySQL-INNER-JOIN-clause"><a href="#Introducing-MySQL-INNER-JOIN-clause" class="headerlink" title="Introducing MySQL INNER JOIN clause"></a>Introducing MySQL INNER JOIN clause</h4><h4 id="Avoid-ambiguous-column-error-in-MySQL-INNER-JOIN"><a href="#Avoid-ambiguous-column-error-in-MySQL-INNER-JOIN" class="headerlink" title="Avoid ambiguous column error in MySQL INNER JOIN"></a>Avoid ambiguous column error in MySQL INNER JOIN</h4><h4 id="MySQL-INNER-JOIN-examples"><a href="#MySQL-INNER-JOIN-examples" class="headerlink" title="MySQL INNER JOIN examples"></a>MySQL INNER JOIN examples</h4><h4 id="MySQL-INNER-JOIN-with-GROUP-BY-clause"><a href="#MySQL-INNER-JOIN-with-GROUP-BY-clause" class="headerlink" title="MySQL INNER JOIN with GROUP BY clause"></a>MySQL INNER JOIN with GROUP BY clause</h4><h4 id="MySQL-INNER-JOIN-using-operator-other-than-equal"><a href="#MySQL-INNER-JOIN-using-operator-other-than-equal" class="headerlink" title="MySQL INNER JOIN using operator other than equal"></a>MySQL INNER JOIN using operator other than equal</h4><h3 id="5-4-LEFT-JOIN"><a href="#5-4-LEFT-JOIN" class="headerlink" title="5.4 LEFT JOIN"></a>5.4 LEFT JOIN</h3><h4 id="Introduction-to-MySQL-LEFT-JOIN"><a href="#Introduction-to-MySQL-LEFT-JOIN" class="headerlink" title="Introduction to MySQL LEFT JOIN"></a>Introduction to MySQL LEFT JOIN</h4><h4 id="MySQL-LEFT-JOIN-examples"><a href="#MySQL-LEFT-JOIN-examples" class="headerlink" title="MySQL LEFT JOIN examples"></a>MySQL LEFT JOIN examples</h4><h4 id="Using-MySQL-LEFT-JOIN-clause-to-find-unmatched-rows"><a href="#Using-MySQL-LEFT-JOIN-clause-to-find-unmatched-rows" class="headerlink" title="Using MySQL LEFT JOIN clause to find unmatched rows"></a>Using MySQL LEFT JOIN clause to find unmatched rows</h4><h4 id="Condition-in-WHERE-clause-vs-ON-clause"><a href="#Condition-in-WHERE-clause-vs-ON-clause" class="headerlink" title="Condition in WHERE clause vs. ON clause"></a>Condition in WHERE clause vs. ON clause</h4><h3 id="5-5-RIGHT-JOIN"><a href="#5-5-RIGHT-JOIN" class="headerlink" title="5.5 RIGHT JOIN"></a>5.5 RIGHT JOIN</h3><h4 id="Introduction-to-MySQL-RIGHT-JOIN-clause"><a href="#Introduction-to-MySQL-RIGHT-JOIN-clause" class="headerlink" title="Introduction to MySQL RIGHT JOIN clause"></a>Introduction to MySQL RIGHT JOIN clause</h4><h4 id="MySQL-RIGHT-JOIN-example"><a href="#MySQL-RIGHT-JOIN-example" class="headerlink" title="MySQL RIGHT JOIN example"></a>MySQL RIGHT JOIN example</h4><h3 id="5-6-CROSS-JOIN"><a href="#5-6-CROSS-JOIN" class="headerlink" title="5.6 CROSS JOIN"></a>5.6 CROSS JOIN</h3><h4 id="Introduction-to-MySQL-CROSS-JOIN-clause"><a href="#Introduction-to-MySQL-CROSS-JOIN-clause" class="headerlink" title="Introduction to MySQL CROSS JOIN clause"></a>Introduction to MySQL CROSS JOIN clause</h4><h4 id="MySQL-CROSS-JOIN-clause-example"><a href="#MySQL-CROSS-JOIN-clause-example" class="headerlink" title="MySQL CROSS JOIN clause example"></a>MySQL CROSS JOIN clause example</h4><h3 id="5-7-Self-join"><a href="#5-7-Self-join" class="headerlink" title="5.7 Self-join"></a>5.7 Self-join</h3><h4 id="MySQL-self-join-examples"><a href="#MySQL-self-join-examples" class="headerlink" title="MySQL self join examples"></a>MySQL self join examples</h4>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/MySQL/">MySQL</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
     <article id="post-NoSQL-Redis" class="article article-type-post" itemscope itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -461,6 +393,65 @@ var themeMenus = {};
     
 
   
+    <article id="post-Python-sort와-sorted" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2018/12/30/Python-sort와-sorted/">[Python] sort와 sorted</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2018/12/30/Python-sort와-sorted/" class="article-date">
+	  <time datetime="2018-12-30T06:34:21.000Z" itemprop="datePublished">December 30, 2018</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="sort-와-sorted-의-차이"><a href="#sort-와-sorted-의-차이" class="headerlink" title="sort() 와 sorted() 의 차이"></a><code>sort()</code> 와 <code>sorted()</code> 의 차이</h3><ul>
+<li><code>sort()</code> 는 리스트 자체를 정렬함</li>
+<li><code>sorted()</code> 는 리스트의 정렬된 복사본을 반환함</li>
+</ul>
+<p>예를 들어 다음과 같은 리스트가 있다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">lalaland = [<span class="string">'Mia'</span>, <span class="string">'Sebastian'</span>, <span class="string">'Emily'</span>, <span class="string">'Ryan'</span>]</span><br></pre></td></tr></table></figure></p>
+<p><code>sorted()</code> 를 하면 원래 변수는 변하지 않는다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted_lalaland = sorted(lalaland)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted_lalaland</span><br><span class="line">[<span class="string">'Emily'</span>, <span class="string">'Mia'</span>, <span class="string">'Ryan'</span>, <span class="string">'Sebastian'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland</span><br><span class="line">[<span class="string">'Mia'</span>, <span class="string">'Sebastian'</span>, <span class="string">'Emily'</span>, <span class="string">'Ryan'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>반면 <code>sort()</code> 를 하면 <code>lalaland</code> 자체를 정렬된 <code>lalaland</code> 로 바꾼다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland.sort()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland</span><br><span class="line">[<span class="string">'Emily'</span>, <span class="string">'Mia'</span>, <span class="string">'Ryan'</span>, <span class="string">'Sebastian'</span>]</span><br></pre></td></tr></table></figure>
+<p>정렬 방식은 기본적으로 오름차순이다. 내림차순으로 정렬하려면 인자에 <code>reverse=True</code> 를 넣어주면 된다.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland.sort(reverse=<span class="keyword">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>lalaland</span><br><span class="line">[<span class="string">'Sebastian'</span>, <span class="string">'Ryan'</span>, <span class="string">'Mia'</span>, <span class="string">'Emily'</span>]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
 
 
   <nav id="page-nav">
@@ -565,18 +556,6 @@ var themeMenus = {};
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/2019/02/21/nltk/">[FC] NLTK test post</a></h6>
-              <span>February 21, 2019</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
               <h6 style="margin: 0;"><a href="/2019/02/20/Python-딕셔너리-key와-value-뒤집기/">[Python] 딕셔너리 key와 value 뒤집기</a></h6>
               <span>February 20, 2019</span>
             </div>
@@ -631,6 +610,18 @@ var themeMenus = {};
 
           </li>
         
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/2019/01/28/Deep-Learning-with-Python-Ch-01/">Deep Learning with Python - Ch.01</a></h6>
+              <span>January 28, 2019</span>
+            </div>
+
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -640,7 +631,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DSBooks/">DSBooks</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NoSQL/">NoSQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/crawling/">crawling</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/datascienceschool/">datascienceschool</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DSBooks/">DSBooks</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NoSQL/">NoSQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/crawling/">crawling</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/datascienceschool/">datascienceschool</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -650,7 +641,7 @@ var themeMenus = {};
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-with-Python/">Deep Learning with Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dr-Kim/">Dr.Kim</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL/">NoSQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawling/">crawling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datascienceschool/">datascienceschool</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastcampus/">fastcampus</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/비숍/">비숍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deep-Learning-with-Python/">Deep Learning with Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dr-Kim/">Dr.Kim</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Keras/">Keras</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/">MySQL</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL/">NoSQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/">Redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawling/">crawling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datascienceschool/">datascienceschool</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastcampus/">fastcampus</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/비숍/">비숍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/패턴-인식과-머신-러닝/">패턴 인식과 머신 러닝</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -670,7 +661,7 @@ var themeMenus = {};
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">15</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">15</span></li></ul>
     </div>
   </div>
 
